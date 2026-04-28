@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ignite Records Song Submission</title>
+  <title>Galgalatz LIVE - הרשמת אמנים</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -28,6 +28,7 @@
       color: var(--text);
       min-height: 100vh;
       padding: 3rem 1rem;
+      direction: rtl;
     }
 
     body::before {
@@ -131,20 +132,9 @@
     input:focus { border-color: var(--fire); }
     input[readonly] { color: var(--text-muted); cursor: default; }
 
-    .track-preview {
-      display: none;
-      margin-top: 0.8rem;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      padding: 0.8rem 1rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .track-preview.visible { display: flex; align-items: center; gap: 0.6rem; }
-    .track-preview .check { color: var(--success); font-size: 1rem; }
-    .track-preview .cross { color: var(--error); font-size: 1rem; }
+    .id-row { display: none; }
+    .id-wrap { display: flex; gap: 8px; align-items: center; }
+    .id-check { font-size: 20px; flex-shrink: 0; }
 
     .terms {
       background: var(--bg3);
@@ -239,146 +229,135 @@
   <div class="container">
 
     <div class="logo">
-      <a href="https://igniterecords26.com/" style="text-decoration:none; color:inherit;">
       <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M50 5 L65 38 L80 22 L68 58 L84 46 L62 82 L70 72 L50 105 L30 72 L38 82 L16 46 L32 58 L20 22 L35 38 Z" fill="#F5A623"/>
         <path d="M50 32 L59 52 L70 42 L61 67 L72 60 L55 88 L50 80 L45 88 L28 60 L39 67 L30 42 L41 52 Z" fill="#C06800"/>
         <path d="M50 58 L56 72 L61 64 L55 82 L50 92 L45 82 L39 64 L44 72 Z" fill="#FFD080"/>
       </svg>
-      <h1>IGNITE <span>RECORDS</span></h1>
-      </a>
-      <p>Song Submission Portal</p>
+      <h1>GALGALATZ <span>LIVE</span></h1>
+      <p>הרשמת אמנים לפלייליסט</p>
     </div>
 
     <div class="divider"></div>
 
-    <!-- Playlist Info -->
     <div class="card" style="margin-bottom: 1.5rem;">
-      <img src="top100.jpg" alt="TOP 100 US" style="width:100%; border-radius:2px; margin-bottom:1.5rem;">
-      <div class="card-title">TOP 100 US</div>
-      <p class="card-subtitle" style="margin-bottom:1.2rem;">The best songs in America curated weekly by Ignite Records. The playlist features the top 100 most popular tracks in the US, updated every Wednesday with the latest chart data.</p>
+      <img src="glive.jpg" alt="Galgalatz LIVE" style="width:100%; border-radius:2px; margin-bottom:1.5rem;">
+      <div class="card-title">Galgalatz LIVE</div>
+      <p class="card-subtitle" style="margin-bottom:1.2rem;">רדיו גלגל"צ משדר 24/7 עם השירים החמים ביותר בישראל. הפלייליסט שלנו מעודכן בזמן אמת עם כל שיר שמשודר.<br><br><span style="font-size:0.75rem; color:#999;">* הפלייליסט הוא עצמאי ואין לו שום קשר רשמי לתחנת גלגל"צ.</span></p>
 
       <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin-bottom:1.5rem;">
         <div style="text-align:center; background:var(--bg3); border:1px solid var(--border); padding:1rem 0.5rem;">
-          <div style="font-family:'Bebas Neue',cursive; font-size:2rem; color:var(--fire);">100</div>
-          <div style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-top:0.2rem;">Tracks</div>
+          <div style="font-family:'Bebas Neue',cursive; font-size:2rem; color:var(--fire);">24/7</div>
+          <div style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-top:0.2rem;">שדור חי</div>
         </div>
         <div style="text-align:center; background:var(--bg3); border:1px solid var(--border); padding:1rem 0.5rem;">
-          <div style="font-family:'Bebas Neue',cursive; font-size:2rem; color:var(--fire);">Weekly</div>
-          <div style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-top:0.2rem;">Updated</div>
+          <div style="font-family:'Bebas Neue',cursive; font-size:2rem; color:var(--fire);">LIVE</div>
+          <div style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-top:0.2rem;">בזמן אמת</div>
         </div>
         <div style="text-align:center; background:var(--bg3); border:1px solid var(--border); padding:1rem 0.5rem;">
-          <div style="font-family:'Bebas Neue',cursive; font-size:2rem; color:var(--fire);">Wed</div>
-          <div style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-top:0.2rem;">Every Week</div>
-        </div>
-      </div>
-
-      <div style="background:var(--bg3); border:1px solid var(--border); padding:1.2rem; margin-bottom:1rem;">
-        <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire); margin-bottom:0.8rem;">How It Works</div>
-        <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.9;">
-          Every Wednesday, the playlist is automatically refreshed with the latest top 100 songs in America. 
-          Selected Ignite Records artists are featured within the playlist one track per artist, placed naturally throughout the 100 songs.
-          The playlist updates weekly to stay current with the latest chart movements.
+          <div style="font-family:'Bebas Neue',cursive; font-size:2rem; color:var(--fire);">IL</div>
+          <div style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-top:0.2rem;">ישראל</div>
         </div>
       </div>
 
       <div style="background:var(--bg3); border:1px solid var(--border); padding:1.2rem;">
-        <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire); margin-bottom:0.8rem;">Artist Placement</div>
+        <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire); margin-bottom:0.8rem;">איך זה עובד</div>
         <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.9;">
-          Approved artists submit one specific track for placement. That track is featured once every 5 songs throughout the playlist, giving your music maximum exposure alongside the biggest hits in America.
+          הסקריפט שלנו מושך כל 4 דקות את השיר שמשדר כרגע בגלגל"צ ומוסיף אותו לפלייליסט בספוטיפיי. 
+          כל 5 שירים, אנחנו שותלים שיר של אמן מאושר.
+          כך שהשיר שלך משודר בגלגל"צ, מופיע בפלייליסט בספוטיפיי, והמאזינים בעולם שומעים אותך.
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Submit Your Track</div>
-      <p class="card-subtitle">Apply to have your song featured in the TOP 100 US playlist. Fill in your details below and submit for review.</p>
+      <div class="card-title">הגדירו את הפרטים</div>
+      <p class="card-subtitle">מלאו את הטופס להרשמה לפלייליסט גלגלצ LIVE.</p>
 
       <div class="field">
-        <label>Full Name *</label>
-        <input type="text" id="fullname" placeholder="First and last name" />
+        <label>שם מלא</label>
+        <input type="text" id="fullname" placeholder="שם פרטי ושם משפחה" />
       </div>
 
       <div class="field">
-        <label>Artist Name *</label>
-        <input type="text" id="stagename" placeholder="Your artist or stage name" />
+        <label>שם במה</label>
+        <input type="text" id="stagename" placeholder="השם שבו אתה מוכר כאמן" />
       </div>
 
       <div class="field">
-        <label>Email Address *</label>
+        <label>כתובת מייל</label>
         <input type="email" id="email" placeholder="your@email.com" />
       </div>
 
       <div class="field">
-        <label>Spotify Track Link *</label>
-        <input type="url" id="trackurl" placeholder="https://open.spotify.com/track/..." oninput="extractTrack(this.value)" />
-        <div class="track-preview" id="track-preview">
-          <span id="track-check"></span>
-          <span id="track-info"></span>
+        <label>קישור לדף האמן בספוטיפיי</label>
+        <input type="url" id="spotify" placeholder="https://open.spotify.com/artist/..." oninput="extractId(this.value)" />
+      </div>
+
+      <div class="field id-row" id="id-row">
+        <label>מזהה אמן בספוטיפיי</label>
+        <div class="id-wrap">
+          <input type="text" id="artist-id" readonly />
+          <span class="id-check" id="id-check"></span>
         </div>
-        <input type="hidden" id="track-id" />
       </div>
 
       <div class="terms">
-        <div class="terms-title">Terms & Agreement</div>
+        <div class="terms-title">הצהרה והסכמה</div>
         <div class="terms-text">
-          By submitting, you confirm the following:<br><br>
-          1. This submission does not guarantee inclusion in any Ignite Records playlist, current or future.<br><br>
-          2. You confirm that you are the rights holder or have the legal right to submit this track.<br><br>
-          3. Ignite Records reserves the right to accept or decline any submission without explanation.<br><br>
-          4. If accepted, you agree to promote the playlist on your social media channels.
+          אני מצהיר/ה כי קראתי והבנתי את התנאים הבאים:<br><br>
+          1. הרשמה זו אינה מהווה התחייבות לצרף את האמן לפלייליסט.<br><br>
+          2. פרויקט זה הוא חובבני ונמצא בשלב בטא.<br><br>
+          3. לא תהיינה לי טענות כלפי יוצר הפלייליסט.<br><br>
+          4. אמן שיתקבל מתבקש לקדם את הפלייליסט ברשתות החברתיות.
         </div>
         <label class="checkbox-wrap">
           <input type="checkbox" id="agree" />
-          <span>I have read and agree to all of the above terms.</span>
+          <span>קראתי והסכמתי לכל האמור לעיל</span>
         </label>
       </div>
 
       <div class="terms" style="margin-top: 1rem;">
-        <div class="terms-title">Marketing Communications</div>
+        <div class="terms-title">קבלת עדכונים</div>
         <div class="terms-text">
-          By checking the box below, you agree to receive emails and updates from Ignite Records, including playlist updates, new opportunities, and label news. You may unsubscribe at any time.
+          בחירה בתיבה זו מעניקה הסכמה לקבל מיילים ועדכונים מ Ignite Records, כולל עדכונים על הפלייליסט והזדמנויות חדשות.
         </div>
         <label class="checkbox-wrap">
           <input type="checkbox" id="agree-marketing" />
-          <span>I agree to receive emails and updates from Ignite Records.</span>
+          <span>אני מסכים/ה לקבל עדכונים מ Ignite Records</span>
         </label>
       </div>
 
-      <button class="btn-submit" id="btn" onclick="submitForm()">Submit Track</button>
+      <button class="btn-submit" id="btn" onclick="submitForm()">שלח הרשמה</button>
       <p id="msg"></p>
     </div>
 
     <div class="footer">
-      &copy; 2026 Ignite Records &nbsp;&middot;&nbsp; <a href="https://40sinfreda.github.io/ignite-records/">igniterecords.com</a>
+      &copy; 2026 Ignite Records &nbsp;&middot;&nbsp; <a href="https://igniterecords26.com/">igniterecords.com</a>
     </div>
 
   </div>
 
   <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyQ0CTpAdqF-IZlp3Stcdur_45COVHPVh5PdcaF-tQNTGsR3yydpnvZ0fICleg1aX8P/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx6jn9KD7jumpuzhm_TnrNCBn6_qLfKbcWqyDti6KCpBWPsj_CBczBrmKaaGvXbVakl_w/exec';
 
-    function extractTrack(url) {
-      const match = url.match(/spotify\.com\/track\/([A-Za-z0-9]+)/);
-      const preview = document.getElementById('track-preview');
-      const check = document.getElementById('track-check');
-      const info = document.getElementById('track-info');
-      const trackId = document.getElementById('track-id');
-
+    function extractId(url) {
+      const match = url.match(/spotify\.com\/artist\/([A-Za-z0-9]+)/);
+      const row = document.getElementById('id-row');
+      const idField = document.getElementById('artist-id');
+      const check = document.getElementById('id-check');
       if (match) {
-        trackId.value = match[1];
+        idField.value = match[1];
         check.textContent = '✓';
-        check.className = 'check';
-        info.textContent = 'Track ID: ' + match[1];
-        preview.className = 'track-preview visible';
+        check.style.color = '#60ffb0';
+        row.style.display = 'block';
       } else if (url.length > 10) {
-        trackId.value = '';
+        idField.value = '';
         check.textContent = '✗';
-        check.className = 'cross';
-        info.textContent = 'Invalid Spotify track link';
-        preview.className = 'track-preview visible';
+        check.style.color = '#ff6060';
+        row.style.display = 'block';
       } else {
-        preview.className = 'track-preview';
+        row.style.display = 'none';
       }
     }
 
@@ -386,30 +365,29 @@
       const name = document.getElementById('fullname').value.trim();
       const stagename = document.getElementById('stagename').value.trim();
       const email = document.getElementById('email').value.trim();
-      const trackurl = document.getElementById('trackurl').value.trim();
-      const trackId = document.getElementById('track-id').value.trim();
+      const spotify = document.getElementById('spotify').value.trim();
+      const artistId = document.getElementById('artist-id').value.trim();
       const agree = document.getElementById('agree').checked;
+      const marketing = document.getElementById('agree-marketing').checked;
       const msg = document.getElementById('msg');
       const btn = document.getElementById('btn');
 
       msg.className = '';
-      msg.textContent = '';
-
-      if (!name || !stagename || !email || !trackurl) {
-        msg.className = 'error'; msg.textContent = 'Please fill in all required fields.'; return;
+      if (!name || !stagename || !email || !spotify) {
+        msg.className = 'error'; msg.textContent = 'נא למלא את כל השדות החובה'; return;
       }
       if (!email.includes('@')) {
-        msg.className = 'error'; msg.textContent = 'Please enter a valid email address.'; return;
+        msg.className = 'error'; msg.textContent = 'כתובת מייל לא תקינה'; return;
       }
-      if (!trackId) {
-        msg.className = 'error'; msg.textContent = 'Please enter a valid Spotify track link.'; return;
+      if (!artistId) {
+        msg.className = 'error'; msg.textContent = 'נא להכניס קישור תקין לדף אמן בספוטיפיי'; return;
       }
       if (!agree) {
-        msg.className = 'error'; msg.textContent = 'Please agree to the terms to continue.'; return;
+        msg.className = 'error'; msg.textContent = 'יש לאשר את ההצהרה כדי להמשיך'; return;
       }
 
       btn.disabled = true;
-      msg.textContent = 'Submitting...';
+      msg.textContent = 'שולח...';
 
       try {
         await fetch(SCRIPT_URL, {
@@ -417,22 +395,22 @@
           mode: 'no-cors',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
-            form: 'billboard',
+            form: 'galgalatz',
             fullname: name,
             stagename: stagename,
             email: email,
-            trackurl: trackurl,
-            trackId: trackId,
-            marketing: document.getElementById('agree-marketing').checked
+            spotify: spotify,
+            artistId: artistId,
+            marketing: marketing
           })
         });
         msg.className = 'success';
-        msg.textContent = 'Thank you! Your submission has been received. We will be in touch soon.';
+        msg.textContent = 'תודה! הפרטים נשלחו בהצלחה. נחזור אליך בקרוב.';
         document.querySelectorAll('input').forEach(i => i.disabled = true);
         btn.disabled = true;
       } catch(e) {
         msg.className = 'error';
-        msg.textContent = 'Submission failed. Please try again.';
+        msg.textContent = 'שגיאה בשליחה, נסה שוב.';
         btn.disabled = false;
       }
     }
