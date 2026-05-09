@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nixie Row - Ignite Records</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fire: #F5A623;
+      --fire-dark: #E07B00;
+      --bg: #0D0D0D;
+      --bg2: #151515;
+      --bg3: #1E1E1E;
+      --text: #F0EDE8;
+      --text-muted: #A8A89E;
+      --border: rgba(245,166,35,0.15);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    nav {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: var(--fire);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover { color: var(--fire-dark); }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(245,166,35,0.1) 0%, transparent 100%);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .hero-image {
+      width: 300px;
+      height: 300px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin: 0 auto 2rem;
+      border: 2px solid var(--border);
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: 0.1em;
+      color: var(--fire);
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .bio {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.5rem;
+      margin: 3rem auto;
+      line-height: 1.9;
+      color: #d0d0d0;
+    }
+
+    .bio p {
+      margin-bottom: 1.5rem;
+    }
+
+    .bio h3 {
+      font-family: 'Bebas Neue', cursive;
+      color: var(--fire);
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .ai-badge {
+      display: inline-block;
+      background: var(--fire);
+      color: var(--bg);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-top: 1.5rem;
+    }
+
+    .upcoming {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.5rem;
+      margin: 3rem auto;
+      text-align: center;
+    }
+
+    .upcoming h2 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2rem;
+      color: var(--fire);
+      margin-bottom: 1rem;
+    }
+
+    .release-date {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .release-info {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      background: var(--fire);
+      color: var(--bg);
+      border: none;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+
+    .btn:hover { background: var(--fire-dark); }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .social-links a {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-decoration: none;
+      color: var(--fire);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .social-links a:hover {
+      background: var(--fire);
+      color: var(--bg);
+      border-color: var(--fire);
+    }
+
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--fire);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="https://igniterecords26.com/">← Back to Ignite Records</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="container">
+      <img src="nixie-row.jpg" alt="Nixie Row" class="hero-image">
+      <h1>Nixie Row</h1>
+      <p class="subtitle">Singer / Songwriter / Indie-Soul Artist</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="bio">
+      <h3>The Roots</h3>
+      <p>Nixie Row was born and raised in the heart of East London, in an area where the noise of the markets meets underground jazz clubs. Daughter of immigrants who brought with them rare record collections of Motown and Classic Soul, Nixie found herself at a young age deconstructing and reworking songs by Amy Winehouse and Aretha Franklin on an old, worn-out piano in her parents' house.</p>
+
+      <h3>The Sound</h3>
+      <p>Nixie's music is a "frontal collision" between worlds. She calls her style "Vintage-Modern Fusion." It is a heady blend of dirty blues-rock, brass instruments that shriek "funk," and cinematic orchestral arrangements. Above it all floats her unique voice—deep, smoky and raw, as if it carries with it all the secrets of the London night.</p>
+
+      <p>Nixie broke conventions when she decided to blend fast, sharp rap segments into her soul songs, performed in that same raw and distinctive voice, which became her unmistakable trademark.</p>
+
+      <h3>The Journey</h3>
+      <p>After years of performances in shadowy "Dirty Blues" clubs in Camden Town, Nixie broke through with her ability to transform personal pain into sophisticated musical drama. Her songs deal with unvarnished truth: the small addictions of life, the struggle to maintain freedom within "golden cages," and the relentless pursuit of stolen time.</p>
+
+      <h3>Nixie Row Today</h3>
+      <p>Today, Nixie Row is considered one of the most promising and intriguing voices in the British Indie-Soul scene. She is not just a singer, she is a storyteller who blends European sophistication with street rawness. When she takes the stage in her long black coat with a horn section behind her, it is clear to everyone that she is here to bring the soul back to rock and roll.</p>
+
+      <p style="font-style: italic; margin-top: 2rem;">"I don't write songs to make you smile. I write them so you feel something, even if it hurts a little. My music is the place where gold meets dirt." — Nixie Row</p>
+
+      <span class="ai-badge">AI PRODUCT</span>
+    </div>
+
+    <div class="upcoming">
+      <h2>Upcoming Release</h2>
+      <p class="release-date">My Time</p>
+      <p class="release-info">10-Track Album</p>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Available June 26, 2026</p>
+      <div class="buttons">
+        <a href="https://distrokid.com/hyperfollow/nixierow/my-time" target="_blank" class="btn">Pre-Save</a>
+      </div>
+    </div>
+
+    <div style="background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; padding: 2.5rem; margin: 3rem auto; text-align: center;">
+      <h3 style="font-family: 'Bebas Neue', cursive; font-size: 1.8rem; color: var(--fire); margin-bottom: 1.5rem;">Follow Nixie Row</h3>
+      <div class="social-links">
+        <a href="https://www.instagram.com/nixierow/" target="_blank" title="Instagram">IG</a>
+        <a href="https://www.facebook.com/NIXIEROW" target="_blank" title="Facebook">FB</a>
+        <a href="https://www.youtube.com/@nixierow" target="_blank" title="YouTube">YT</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Ignite Records. All rights reserved. | <a href="https://igniterecords26.com/">Back to Home</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
