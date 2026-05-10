@@ -47,8 +47,8 @@
   .title { font-family: 'Bebas Neue', cursive; font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: 0.05em; line-height: 1; margin-bottom: 3rem; }
 
   #artists { background: var(--bg2); }
-  .artists-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
-  .artist-card { position: relative; overflow: hidden; background: var(--bg3); aspect-ratio: 3/4; cursor: pointer; max-width: 280px; margin: 0 auto; }
+  .artists-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; width: 100%; }
+  .artist-card { position: relative; overflow: hidden; background: var(--bg3); aspect-ratio: 1/1; cursor: pointer; max-width: 100%; }
   .artist-card img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: grayscale(20%) brightness(0.75); transition: all 0.5s ease; }
   .artist-card:hover img { filter: grayscale(0%) brightness(0.88); transform: scale(1.04); }
   .artist-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: background 0.4s; }
@@ -157,60 +157,69 @@
   </div>
 </section>
 
-<section id="artists" aria-labelledby="artists-heading">
-  <div class="container">
-    <p class="label">Our Roster</p>
-    <h2 class="title" id="artists-heading">The Artists</h2>
-    <div class="artists-grid">
-
+<section id="artists" aria-labelledby="artists-heading" style="background: var(--bg2); padding: 4rem 2rem;">
+  <div style="max-width: 1400px; margin: 0 auto;">
+    <p class="label" style="text-align: center;">Our Roster</p>
+    <h2 class="title" id="artists-heading" style="text-align: center; margin-bottom: 3rem;">The Artists</h2>
+  </div>
+  
+  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 800px; margin: 0 auto; padding: 0 1rem;">
+      
+      <!-- SEAN LEVINE -->
       <a href="sean-levine.html" style="text-decoration: none; color: inherit;">
-      <div class="artist-card" role="article" tabindex="0" aria-label="Sean Levine - artist">
-        <img src="SL.jpg" style="object-position: center 20%;" alt="Sean Levine, guitarist performing under a starry sky">
-        <div class="artist-info">
-          <div class="artist-name">Sean Levine</div>
-          <div class="artist-genre">Singer / Songwriter</div>
-          <div class="artist-links">
-            <a href="https://open.spotify.com/artist/6wKZVhE7JPFgDdHonDuWiJ" target="_blank" class="artist-link">Spotify &#8599;</a>
+      <div style="position: relative; overflow: hidden; background: var(--bg3); aspect-ratio: 1/1; cursor: pointer;">
+        <img src="SL.jpg" style="width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: grayscale(20%) brightness(0.75); transition: all 0.5s ease;" alt="Sean Levine">
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.5rem 1.5rem; background: linear-gradient(transparent, rgba(0,0,0,0.93)); transform: translateY(40%); transition: transform 0.4s ease;">
+          <div style="font-family: 'Bebas Neue', cursive; font-size: clamp(1.5rem, 4vw, 2rem); letter-spacing: 0.08em;">Sean Levine</div>
+          <div style="font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--fire); margin-top: 0.3rem;">Singer / Songwriter</div>
+          <div style="display: flex; gap: 0.8rem; margin-top: 1rem; font-size: 0.65rem;">
+            <a href="https://open.spotify.com/artist/6wKZVhE7JPFgDdHonDuWiJ" target="_blank" style="color: var(--fire); text-decoration: none;">Spotify ↗</a>
+            <a href="https://music.youtube.com/channel/UCwMIvUO3oZrY_ZTWBWibxlg" target="_blank" style="color: var(--fire); text-decoration: none;">YouTube ↗</a>
           </div>
         </div>
       </div>
       </a>
 
-
+      <!-- MARLI WEST -->
       <a href="marli-west.html" style="text-decoration: none; color: inherit;">
-      <div class="artist-card" role="article" tabindex="0" aria-label="Marli West - artist">
-        <img src="emoXx.jpg" style="object-position: center 15%;" alt="Marli West, singer performing with intensity">
-        <div class="artist-info">
-          <div class="artist-name">Marli West</div>
-          <div class="artist-genre">Singer / Songwriter</div>
-          <div class="artist-links">
-            <a href="https://open.spotify.com/artist/1YYhdcqL8v4RBGWUD2XwNX" target="_blank" class="artist-link">Spotify &#8599;</a>
+      <div style="position: relative; overflow: hidden; background: var(--bg3); aspect-ratio: 1/1; cursor: pointer;">
+        <img src="emoXx.jpg" style="width: 100%; height: 100%; object-fit: cover; object-position: center 15%; filter: grayscale(20%) brightness(0.75); transition: all 0.5s ease;" alt="Marli West">
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.5rem 1.5rem; background: linear-gradient(transparent, rgba(0,0,0,0.93)); transform: translateY(40%); transition: transform 0.4s ease;">
+          <div style="font-family: 'Bebas Neue', cursive; font-size: clamp(1.5rem, 4vw, 2rem); letter-spacing: 0.08em;">Marli West</div>
+          <div style="font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--fire); margin-top: 0.3rem;">Singer / Songwriter</div>
+          <div style="display: flex; gap: 0.8rem; margin-top: 1rem; font-size: 0.65rem;">
+            <a href="https://open.spotify.com/album/5xkKPkkgkDH2NACvH8pZC2" target="_blank" style="color: var(--fire); text-decoration: none;">Spotify ↗</a>
+            <a href="https://music.youtube.com/channel/UCXziCUDkAm2Ew325KA9RrfQ" target="_blank" style="color: var(--fire); text-decoration: none;">YouTube ↗</a>
           </div>
         </div>
       </div>
       </a>
 
-
+      <!-- TEOMIC FIRE -->
       <a href="teomic-fire.html" style="text-decoration: none; color: inherit;">
-      <div class="artist-card" role="article" tabindex="0" aria-label="Teomic Fire - artist">
-        <img src="teomic.jpg" style="object-position: center center; object-fit: cover; background: #000;" alt="Teomic Fire High Energy album cover">
-        <div class="artist-info">
-          <div class="artist-name">Teomic Fire</div>
-          <div class="artist-genre">Electronic / High Energy</div>
-          <div class="artist-links">
-            <a href="https://open.spotify.com/artist/1q4AeO5g6ahHV5GxbBYoEt" target="_blank" class="artist-link">Spotify &#8599;</a>
+      <div style="position: relative; overflow: hidden; background: var(--bg3); aspect-ratio: 1/1; cursor: pointer;">
+        <img src="teomic.jpg" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; filter: grayscale(20%) brightness(0.75); transition: all 0.5s ease;" alt="Teomic Fire">
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.5rem 1.5rem; background: linear-gradient(transparent, rgba(0,0,0,0.93)); transform: translateY(40%); transition: transform 0.4s ease;">
+          <div style="font-family: 'Bebas Neue', cursive; font-size: clamp(1.5rem, 4vw, 2rem); letter-spacing: 0.08em;">Teomic Fire</div>
+          <div style="font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--fire); margin-top: 0.3rem;">Electronic / High Energy</div>
+          <div style="display: flex; gap: 0.8rem; margin-top: 1rem; font-size: 0.65rem;">
+            <a href="https://open.spotify.com/artist/1q4AeO5g6ahHV5GxbBYoEt" target="_blank" style="color: var(--fire); text-decoration: none;">Spotify ↗</a>
+            <a href="https://music.youtube.com/channel/UCujwPUEreV_F1bcEJrEFWqA" target="_blank" style="color: var(--fire); text-decoration: none;">YouTube ↗</a>
           </div>
         </div>
       </div>
+      </a>
 
+      <!-- NIXIE ROW -->
       <a href="nixie-row.html" style="text-decoration: none; color: inherit;">
-      <div class="artist-card" role="article" tabindex="0" aria-label="Nixie Row - artist">
-        <img src="nixie-row.jpg" style="object-position: center center; object-fit: cover; background: #000;" alt="Nixie Row">
-        <div class="artist-info">
-          <div class="artist-name">Nixie Row</div>
-          <div class="artist-genre">Singer / Songwriter</div>
-          <div class="artist-links">
-            <a href="https://www.instagram.com/nixierow/" target="_blank" class="artist-link">Instagram &#8599;</a>
+      <div style="position: relative; overflow: hidden; background: var(--bg3); aspect-ratio: 1/1; cursor: pointer;">
+        <img src="nixie-row.jpg" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; filter: grayscale(20%) brightness(0.75); transition: all 0.5s ease;" alt="Nixie Row">
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.5rem 1.5rem; background: linear-gradient(transparent, rgba(0,0,0,0.93)); transform: translateY(40%); transition: transform 0.4s ease;">
+          <div style="font-family: 'Bebas Neue', cursive; font-size: clamp(1.5rem, 4vw, 2rem); letter-spacing: 0.08em;">Nixie Row</div>
+          <div style="font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--fire); margin-top: 0.3rem;">Singer / Songwriter</div>
+          <div style="display: flex; gap: 0.8rem; margin-top: 1rem; font-size: 0.65rem;">
+            <a href="https://distrokid.com/hyperfollow/nixierow/my-time" target="_blank" style="color: var(--fire); text-decoration: none;">Distrokid ↗</a>
+            <a href="https://www.youtube.com/@nixierow" target="_blank" style="color: var(--fire); text-decoration: none;">YouTube ↗</a>
           </div>
         </div>
       </div>
@@ -218,42 +227,14 @@
 
     </div>
 
-    <div style="margin-top:4rem;">
-      <p class="label">Latest Release</p>
-      <h3 style="font-family:'Bebas Neue',cursive;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:0.05em;margin-bottom:2rem;">Teomic Fire &mdash; High Energy</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;" class="album-grid">
-        <div>
-          <p style="color:var(--text-muted);line-height:1.9;margin-bottom:1.5rem;">10 explosive tracks of pure high energy music. Out now on all platforms.</p>
-          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-            <a href="https://open.spotify.com/album/4RikPOmKaec4BVtPx7fGhi" target="_blank" class="btn btn-solid">Listen on Spotify</a>
-            <a href="https://music.youtube.com/channel/UCujwPUEreV_F1bcEJrEFWqA" target="_blank" class="btn btn-solid">YouTube Music</a>
-          </div>
-        </div>
-        <div style="border:0.5px solid var(--border);overflow:hidden;">
-          <iframe title="Teomic Fire - High Energy album player" src="https://open.spotify.com/embed/album/4RikPOmKaec4BVtPx7fGhi?utm_source=generator&theme=0" width="100%" height="380" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
+</section>
 
-    <div style="margin-top:4rem;">
-      <p class="label">Latest Release</p>
-      <h3 style="font-family:'Bebas Neue',cursive;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:0.05em;margin-bottom:2rem;">Marli West &mdash; What Did You Do?</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;" class="album-grid">
-        <div>
-          <p style="color:var(--text-muted);line-height:1.9;margin-bottom:1.5rem;">10 tracks of raw, honest songwriting. Marli West's debut album is out now on all platforms.</p>
-          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-            <a href="https://open.spotify.com/album/5xkKPkkgkDH2NACvH8pZC2" target="_blank" class="btn btn-solid">Listen on Spotify</a>
-            <a href="https://music.youtube.com/channel/UCXziCUDkAm2Ew325KA9RrfQ" target="_blank" class="btn btn-solid">YouTube Music</a>
-          </div>
-        </div>
-        <div style="border:0.5px solid var(--border);overflow:hidden;">
-          <iframe title="Marli West - What Did You Do? album player" src="https://open.spotify.com/embed/album/5xkKPkkgkDH2NACvH8pZC2?utm_source=generator&theme=0" width="100%" height="380" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-top:4rem;">
-      <p class="label">Latest Release</p>
+<section id="releases" aria-labelledby="releases-heading" style="background: var(--bg); padding: 4rem 2rem;">
+  <div class="container">
+    <p class="label" style="text-align: center;">Latest Releases</p>
+    <h2 class="title" id="releases-heading" style="text-align: center; margin-bottom: 3rem;">The Music</h2>
+    
+    <div style="margin-bottom: 4rem;">
       <h3 style="font-family:'Bebas Neue',cursive;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:0.05em;margin-bottom:2rem;">Sean Levine &mdash; Happy Days</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;" class="album-grid">
         <div>
@@ -269,6 +250,53 @@
       </div>
     </div>
 
+    <div style="margin-bottom: 4rem;">
+      <h3 style="font-family:'Bebas Neue',cursive;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:0.05em;margin-bottom:2rem;">Marli West &mdash; What Did You Do?</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;" class="album-grid">
+        <div>
+          <p style="color:var(--text-muted);line-height:1.9;margin-bottom:1.5rem;">10 tracks of raw, honest songwriting. Marli West's debut album is out now on all platforms.</p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="https://open.spotify.com/album/5xkKPkkgkDH2NACvH8pZC2" target="_blank" class="btn btn-solid">Listen on Spotify</a>
+            <a href="https://music.youtube.com/channel/UCXziCUDkAm2Ew325KA9RrfQ" target="_blank" class="btn btn-solid">YouTube Music</a>
+          </div>
+        </div>
+        <div style="border:0.5px solid var(--border);overflow:hidden;">
+          <iframe title="Marli West - What Did You Do album player" src="https://open.spotify.com/embed/album/5xkKPkkgkDH2NACvH8pZC2?utm_source=generator&theme=0" width="100%" height="380" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 4rem;">
+      <h3 style="font-family:'Bebas Neue',cursive;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:0.05em;margin-bottom:2rem;">Teomic Fire &mdash; High Energy</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;" class="album-grid">
+        <div>
+          <p style="color:var(--text-muted);line-height:1.9;margin-bottom:1.5rem;">10 explosive tracks of pure high energy music. Out now on all platforms.</p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="https://open.spotify.com/album/4RikPOmKaec4BVtPx7fGhi" target="_blank" class="btn btn-solid">Listen on Spotify</a>
+            <a href="https://music.youtube.com/channel/UCujwPUEreV_F1bcEJrEFWqA" target="_blank" class="btn btn-solid">YouTube Music</a>
+          </div>
+        </div>
+        <div style="border:0.5px solid var(--border);overflow:hidden;">
+          <iframe title="Teomic Fire - High Energy album player" src="https://open.spotify.com/embed/album/4RikPOmKaec4BVtPx7fGhi?utm_source=generator&theme=0" width="100%" height="380" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 4rem;">
+      <h3 style="font-family:'Bebas Neue',cursive;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:0.05em;margin-bottom:2rem;">Nixie Row &mdash; My Time</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;" class="album-grid">
+        <div>
+          <p style="color:var(--text-muted);line-height:1.9;margin-bottom:1.5rem;">10-track album coming June 26, 2026. Pre-save now on your favorite platform.</p>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="https://distrokid.com/hyperfollow/nixierow/my-time" target="_blank" class="btn btn-solid">Pre-Save on Spotify</a>
+            <a href="https://www.youtube.com/@nixierow" target="_blank" class="btn btn-solid">YouTube</a>
+          </div>
+        </div>
+        <div style="border:0.5px solid var(--border);overflow:hidden;background:var(--bg3);display:flex;align-items:center;justify-content:center;height:380px;">
+          <p style="color:var(--text-muted);text-align:center;">Coming soon...</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -297,7 +325,6 @@
   </div>
 </section>
 
-<section id="playlist" aria-labelledby="playlist-heading">
   <div class="container">
     <div class="playlist-wrap">
       <div class="playlist-text">
