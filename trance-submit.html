@@ -261,30 +261,29 @@
       return;
     }
 
-    // Prepare data for Google Sheet
-    const data = {
-      timestamp: new Date().toISOString(),
-      artistName,
-      trackName,
-      spotifyUrl,
-      trackId,
-      email,
-      marketing: document.getElementById('marketing').checked ? 'Yes' : 'No'
-    };
+    // Prepare data - send as form-encoded, not JSON
+    const formData = new URLSearchParams();
+    formData.append('artistName', artistName);
+    formData.append('trackName', trackName);
+    formData.append('spotifyUrl', spotifyUrl);
+    formData.append('trackId', trackId);
+    formData.append('email', email);
+    formData.append('marketing', document.getElementById('marketing').checked ? 'Yes' : 'No');
 
     try {
-      // This will be replaced with actual Apps Script URL
-      const response = await fetch('https://script.google.com/macros/s/AKfycbzjaFemm01yd_b5pURADcEB5KZ2xS4FBnbN1GA4a9ta_dJFXFkqttUAZNWmk84HS3Pv/exec', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxKaAC75S9XkDLyBytoc19TuIHwvVc1ZKWq-aq9nMsLFYsufL23HI4Wus-D8Xcjupn0/exec', {
         method: 'POST',
-        body: JSON.stringify(data)
+        body: formData,
+        mode: 'no-cors'
       });
 
-      if (response.ok) {
-        document.getElementById('successMessage').style.display = 'block';
-        document.getElementById('tranceForm').reset();
-      } else {
-        throw new Error('Submission failed');
-      }
+      // Show success message
+      document.getElementById('successMessage').style.display = 'block';
+      document.getElementById('errorMessage').style.display = 'none';
+      document.getElementById('tranceForm').reset();
+      
+      // Scroll to success message
+      document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
     } catch (error) {
       document.getElementById('errorMessage').textContent = '✗ Error submitting track. Please try again later.';
       document.getElementById('errorMessage').style.display = 'block';
