@@ -253,21 +253,29 @@
       return;
     }
 
-    // Prepare data - send as form-encoded, not JSON
-    const formData = new URLSearchParams();
-    formData.append('artistName', artistName);
-    formData.append('trackName', trackName);
-    formData.append('spotifyUrl', spotifyUrl);
-    formData.append('trackId', trackId);
-    formData.append('email', email);
-    formData.append('marketing', document.getElementById('marketing').checked ? 'Yes' : 'No');
+    // Prepare data - send as JSON
+    const data = {
+      artistName,
+      trackName,
+      spotifyUrl,
+      trackId,
+      email,
+      marketing: document.getElementById('marketing').checked ? 'Yes' : 'No'
+    };
 
     try {
+      console.log("Submitting data:", data);
+
       const response = await fetch('https://script.google.com/macros/s/AKfycbxKaAC75S9XkDLyBytoc19TuIHwvVc1ZKWq-aq9nMsLFYsufL23HI4Wus-D8Xcjupn0/exec', {
         method: 'POST',
-        body: formData,
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        },
         mode: 'no-cors'
       });
+
+      console.log("Response received");
 
       // Show success message
       document.getElementById('successMessage').style.display = 'block';
@@ -277,6 +285,7 @@
       // Scroll to success message
       document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
     } catch (error) {
+      console.error('Fetch Error:', error);
       document.getElementById('errorMessage').textContent = '✗ Error submitting track. Please try again later.';
       document.getElementById('errorMessage').style.display = 'block';
     }
