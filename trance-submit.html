@@ -122,10 +122,17 @@
       font-size: 1rem;
       letter-spacing: 0.1em;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s;
     }
 
     button:hover { background: var(--fire-dark); }
+    
+    /* עיצוב כפתור מנוטרל בזמן שליחה */
+    button:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
 
     .success-message {
       display: none;
@@ -226,7 +233,7 @@
 
 <footer>
   <div class="container">
-    <p>&copy; 2026 Ignite Records. All rights reserved. | <a href="https://igniterecords26.com/">Home</a></p>
+    <p>© 2026 Ignite Records. All rights reserved. | <a href="https://igniterecords26.com/">Home</a></p>
   </div>
 </footer>
 
@@ -241,53 +248,66 @@
   document.getElementById('tranceForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const artistName = document.getElementById('artistName').value;
-    const trackName = document.getElementById('trackName').value;
+    const submitButton = this.querySelector('button[type="submit"]');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    // הסתרת הודעות קודמות לפני ניסיון חדש
+    successMessage.style.display = 'none';
+    errorMessage.style.display = 'none';
+
     const spotifyUrl = document.getElementById('spotifyUrl').value;
-    const email = document.getElementById('email').value;
     const trackId = extractSpotifyId(spotifyUrl);
 
     if (!trackId) {
-      document.getElementById('errorMessage').textContent = '✗ Invalid Spotify URL. Please check and try again.';
-      document.getElementById('errorMessage').style.display = 'block';
+      errorMessage.textContent = '✗ Invalid Spotify URL. Please check and try again.';
+      errorMessage.style.display = 'block';
       return;
     }
 
-    // Prepare data - send as JSON
+    // נעילת כפתור השליחה למניעת כפילויות בגיליון
+    submitButton.disabled = true;
+    submitButton.textContent = 'Submitting...';
+
+    // הכנת הנתונים למבנה JSON נקי
     const data = {
-      artistName,
-      trackName,
-      spotifyUrl,
-      trackId,
-      email,
+      artistName: document.getElementById('artistName').value,
+      trackName: document.getElementById('trackName').value,
+      spotifyUrl: spotifyUrl,
+      trackId: trackId,
+      email: document.getElementById('email').value,
       marketing: document.getElementById('marketing').checked ? 'Yes' : 'No'
     };
 
     try {
       console.log("Submitting data:", data);
 
-      const response = await fetch('https://script.google.com/macros/s/AKfycbxKaAC75S9XkDLyBytoc19TuIHwvVc1ZKWq-aq9nMsLFYsufL23HI4Wus-D8Xcjupn0/exec', {
+      // ביצוע ה-Fetch ללא no-cors כדי לאפשר זיהוי שגיאות רשת
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzR98kzLb4sRKb2R7iUyAeJZKSgUiBLGxdc1yz0UlvOxkv4ImN_cOEA7DKumkYNSQPp/exec', {
         method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'no-cors'
+        body: JSON.stringify(data)
       });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
       console.log("Response received");
 
-      // Show success message
-      document.getElementById('successMessage').style.display = 'block';
-      document.getElementById('errorMessage').style.display = 'none';
-      document.getElementById('tranceForm').reset();
-      
-      // Scroll to success message
-      document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+      // הצגת הודעת הצלחה ואיפוס הטופס
+      successMessage.style.display = 'block';
+      this.reset();
+      successMessage.scrollIntoView({ behavior: 'smooth' });
+
     } catch (error) {
       console.error('Fetch Error:', error);
-      document.getElementById('errorMessage').textContent = '✗ Error submitting track. Please try again later.';
-      document.getElementById('errorMessage').style.display = 'block';
+      errorMessage.textContent = '✗ Error submitting track. Please try again later.';
+      errorMessage.style.display = 'block';
+      errorMessage.scrollIntoView({ behavior: 'smooth' });
+    } finally {
+      // שחרור נעילת הכפתור
+      submitButton.disabled = false;
+      submitButton.textContent = 'Submit Track';
     }
   });
 </script>
