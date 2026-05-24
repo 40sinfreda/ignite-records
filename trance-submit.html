@@ -127,7 +127,7 @@
 
     button:hover { background: var(--fire-dark); }
     
-    /* עיצוב כפתור מנוטרל בזמן שליחה */
+    /* עיצוב כפתור מנוטרל בזמן שליחה למניעת לחיצות כפולות */
     button:disabled {
       background: var(--text-muted);
       cursor: not-allowed;
@@ -252,7 +252,7 @@
     const successMessage = document.getElementById('successMessage');
     const errorMessage = document.getElementById('errorMessage');
 
-    // הסתרת הודעות קודמות לפני ניסיון חדש
+    // הסתרת הודעות קודמות לפני התחלת שליחה חדשה
     successMessage.style.display = 'none';
     errorMessage.style.display = 'none';
 
@@ -265,11 +265,11 @@
       return;
     }
 
-    // נעילת כפתור השליחה למניעת כפילויות בגיליון
+    // נעילת כפתור השליחה למניעת הגשות כפולות לאקסל
     submitButton.disabled = true;
     submitButton.textContent = 'Submitting...';
 
-    // הכנת הנתונים למבנה JSON נקי
+    // הכנת הנתונים למבנה נקי לשליחה
     const data = {
       artistName: document.getElementById('artistName').value,
       trackName: document.getElementById('trackName').value,
@@ -282,8 +282,8 @@
     try {
       console.log("Submitting data:", data);
 
-      // ביצוע ה-Fetch ללא no-cors כדי לאפשר זיהוי שגיאות רשת
-      const response = await fetch('https://script.google.com/macros/s/AKfycbzR98kzLb4sRKb2R7iUyAeJZKSgUiBLGxdc1yz0UlvOxkv4ImN_cOEA7DKumkYNSQPp/exec', {
+      // ביצוע פנייה ל-Web App המעודכן שלך
+      const response = await fetch('https://script.google.com/macros/s/AKfycbxdZWKsTOfenYpm7ob8cliLfa-LYFHbOt07eKhh_JBJZ10S_cj10UegufDJ2vop6Xo/exec', {
         method: 'POST',
         body: JSON.stringify(data)
       });
@@ -294,7 +294,7 @@
 
       console.log("Response received");
 
-      // הצגת הודעת הצלחה ואיפוס הטופס
+      // הצגת הודעת הצלחה ואיפוס השדות בטופס
       successMessage.style.display = 'block';
       this.reset();
       successMessage.scrollIntoView({ behavior: 'smooth' });
@@ -305,7 +305,7 @@
       errorMessage.style.display = 'block';
       errorMessage.scrollIntoView({ behavior: 'smooth' });
     } finally {
-      // שחרור נעילת הכפתור
+      // שחרור נעילת הכפתור וחזרה למצב רגיל
       submitButton.disabled = false;
       submitButton.textContent = 'Submit Track';
     }
