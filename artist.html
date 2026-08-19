@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artist — Ignite Records</title>
+  <meta name="theme-color" content="#0D0D0D" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+  <nav>
+    <div class="inner">
+      <a href="index.html" class="logo" aria-label="Ignite Records home"><img class="logo-nav-img" src="brand/logo-nav.jpg" alt="Ignite Records" /></a>
+      <a href="index.html" style="font-size:0.85rem;font-weight:600">← Back</a>
+    </div>
+  </nav>
+
+  <div id="content">
+    <p style="text-align:center;padding:4rem;color:var(--muted)">Loading…</p>
+  </div>
+
+  <footer>
+    <p>© 2026 Ignite Records. All rights reserved. · <a href="index.html">Home</a></p>
+  </footer>
+
+  <script src="js/catalog.js"></script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var slug = params.get("slug") || "";
+      var a = window.IGNITE.getArtist(slug);
+      var root = document.getElementById("content");
+      if (!a) {
+        root.innerHTML = '<p style="text-align:center;padding:4rem;color:var(--muted)">Artist not found. <a href="index.html">Home</a></p>';
+        return;
+      }
+      document.title = a.name + " — Ignite Records";
+
+      var albumsHtml = a.albums.map(function (alb) {
+        return (
+          '<div class="album-block">' +
+          '<h3>' + alb.title + '</h3>' +
+          '<div class="btn-row" style="margin-bottom:1rem">' +
+          '<a class="btn" href="https://open.spotify.com/album/' + alb.id + '" target="_blank" rel="noopener">Open on Spotify</a>' +
+          (a.youtube ? '<a class="btn outline" href="' + a.youtube + '" target="_blank" rel="noopener">YouTube</a>' : '') +
+          '</div>' +
+          '<iframe class="spotify" title="' + alb.title + '" ' +
+          'src="https://open.spotify.com/embed/album/' + alb.id + '?utm_source=generator&theme=0" ' +
+          'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>' +
+          '</div>'
+        );
+      }).join("");
+
+      var galleryHtml = "";
+      if (a.gallery && a.gallery.length) {
+        galleryHtml =
+          '<h2 class="section-title" style="margin-top:2rem">Gallery</h2>' +
+          '<div class="gallery">' +
+          a.gallery.map(function (src) {
+            return '<img src="' + src + '" alt="' + a.name + '" />';
+          }).join("") +
+          "</div>";
+      }
+
+      var social = [];
+      if (a.spotifyArtistUrl) social.push('<a href="' + a.spotifyArtistUrl + '" target="_blank" rel="noopener">Spotify</a>');
+      if (a.youtube) social.push('<a href="' + a.youtube + '" target="_blank" rel="noopener">YouTube</a>');
+      if (a.instagram) social.push('<a href="' + a.instagram + '" target="_blank" rel="noopener">Instagram</a>');
+      if (a.facebook) social.push('<a href="' + a.facebook + '" target="_blank" rel="noopener">Facebook</a>');
+
+      var artistEmbed = a.spotifyArtistId
+        ? '<h2 class="section-title" style="margin-top:1rem">Full catalog on Spotify</h2>' +
+          '<div class="container-sm" style="margin-bottom:2rem">' +
+          '<iframe class="spotify" title="' + a.name + ' on Spotify" ' +
+          'src="https://open.spotify.com/embed/artist/' + a.spotifyArtistId + '?utm_source=generator&theme=0" ' +
+          'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>'
+        : "";
+
+      root.innerHTML =
+        '<section class="artist-hero">' +
+        '<img src="' + a.photo + '" alt="' + a.name + '" />' +
+        '<h1>' + a.name + '</h1>' +
+        '<p class="sub">' + a.genre + '</p>' +
+        '</section>' +
+        '<div class="bio">' +
+        a.bio.map(function (p) { return "<p>" + p + "</p>"; }).join("") +
+        (a.quote ? '<p class="quote">“' + a.quote + '” — ' + a.name + '</p>' : '') +
+        (a.ai ? '<span class="ai-badge">AI PRODUCT</span>' : '') +
+        '</div>' +
+        galleryHtml +
+        '<p class="section-label" style="margin-top:2rem">Discography</p>' +
+        '<h2 class="section-title">All Albums on Spotify</h2>' +
+        '<div class="album-list">' + albumsHtml + '</div>' +
+        artistEmbed +
+        (social.length
+          ? '<div class="container-sm" style="text-align:center;padding-bottom:3rem">' +
+            '<h3 style="font-family:\'Bebas Neue\',Impact,sans-serif;font-size:1.6rem;color:var(--fire);margin-bottom:1rem">Follow ' + a.name + '</h3>' +
+            '<div class="social-row">' + social.join("") + '</div></div>'
+          : '');
+    })();
+  </script>
+</body>
+</html>

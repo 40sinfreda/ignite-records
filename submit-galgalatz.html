@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Submit Track — Galgalatz Live · Ignite Records</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+  <nav>
+    <div class="inner">
+      <a href="index.html" class="logo" aria-label="Ignite Records home"><img class="logo-nav-img" src="brand/logo-nav.jpg" alt="Ignite Records" /></a>
+      <a href="index.html" style="font-size:0.85rem;font-weight:600">← Back</a>
+    </div>
+  </nav>
+  <main class="container-sm" style="padding:2.5rem 1.25rem 4rem">
+    <img src="brand/glive.jpg" alt="Galgalatz Live" style="width:100%;border-radius:6px;margin-bottom:1.5rem" />
+    <h1 class="section-title" style="text-align:left;margin-bottom:0.5rem">Galgalatz Live — Submit Your Track</h1>
+    <p style="color:var(--muted);margin-bottom:2rem">Apply to feature in the Galgalatz Live playlist — songs synced with Israel's most listened-to radio station.</p>
+    <form id="f">
+      <div class="form-group"><label>Full Name *</label><input name="fullName" required /></div>
+      <div class="form-group"><label>Artist Name *</label><input name="artistName" required /></div>
+      <div class="form-group"><label>Email *</label><input name="email" type="email" required /></div>
+      <div class="form-group"><label>Spotify Track Link *</label><input name="trackUrl" type="url" placeholder="https://open.spotify.com/track/..." required /></div>
+      <label class="check"><input type="checkbox" required /> I confirm I hold the rights and inclusion is not guaranteed.</label>
+      <label class="check"><input type="checkbox" name="marketing" /> Send me updates from Ignite Records.</label>
+      <button type="submit" class="btn" style="width:100%;margin-top:1rem">Submit Track</button>
+      <p class="msg" id="msg" hidden></p>
+    </form>
+  </main>
+  <footer><p>© 2026 Ignite Records · <a href="index.html">Home</a></p></footer>
+  <script>
+    document.getElementById("f").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var fd = new FormData(e.target);
+      var url = String(fd.get("trackUrl") || "");
+      var id = (url.match(/spotify\.com\/track\/([A-Za-z0-9]+)/) || [])[1];
+      var msg = document.getElementById("msg");
+      msg.hidden = false;
+      if (!id) {
+        msg.className = "msg err";
+        msg.textContent = "Enter a valid Spotify track link.";
+        return;
+      }
+      var body =
+        "Form: TOP 100 US\n" +
+        "Name: " + fd.get("fullName") + "\n" +
+        "Artist: " + fd.get("artistName") + "\n" +
+        "Email: " + fd.get("email") + "\n" +
+        "Track: " + url + "\n" +
+        "Track ID: " + id + "\n" +
+        "Marketing: " + (fd.get("marketing") ? "yes" : "no");
+      window.location.href =
+        "mailto:ignite.records2026@gmail.com?subject=" +
+        encodeURIComponent("Galgalatz Live submission — " + fd.get("artistName")) +
+        "&body=" + encodeURIComponent(body);
+      msg.className = "msg ok";
+      msg.textContent = "Opening your email app…";
+    });
+  </script>
+</body>
+</html>
