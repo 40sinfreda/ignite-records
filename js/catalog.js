@@ -116,10 +116,10 @@ window.IGNITE = {
       id: "galgalatz",
       title: "Galgalatz Live",
       label: "Live on air",
-      desc: "A curated playlist that updates with songs played live on Galgalatz — Israel's most listened-to radio station.",
+      desc: "Playlist synced in real time with songs aired on Galgalatz. Approved artists are planted every 5 tracks. Independent fan project — not officially affiliated with the station.",
       cover: "brand/glive.jpg",
       spotifyId: "2sCgMi2KCgRfeqWIdjJNxv",
-      submit: "submit-galgalatz.html"
+      submit: "galgalatz-live.html"
     }
   ]
 };
