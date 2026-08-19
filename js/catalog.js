@@ -107,10 +107,10 @@ window.IGNITE = {
       id: "top100",
       title: "TOP 100 US",
       label: "Weekly chart",
-      desc: "The best songs in America, updated every Wednesday. 100 tracks featuring the biggest hits alongside selected Ignite Records artists.",
+      desc: "The best songs in America, updated every Thursday. 100 tracks featuring the biggest hits alongside selected Ignite Records artists.",
       cover: "brand/top100.jpg",
       spotifyId: "1X6UzSIauC4xc061NcFL2w",
-      submit: "submit.html"
+      submit: "submission.html"
     },
     {
       id: "galgalatz",
