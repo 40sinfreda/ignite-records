@@ -305,31 +305,39 @@
       <div class="terms">
         <div class="terms-title">הצהרה והסכמה</div>
         <div class="terms-text">
-          אני מצהיר/ה כי קראתי והבנתי את התנאים הבאים:<br><br>
-          1. הרשמה זו אינה מהווה התחייבות לצרף את האמן לפלייליסט.<br><br>
-          2. פרויקט זה הוא חובבני ונמצא בשלב בטא.<br><br>
-          3. לא תהיינה לי טענות כלפי יוצר הפלייליסט.<br><br>
-          4. אמן שיתקבל מתבקש לקדם את הפלייליסט ברשתות החברתיות.
+          * זהו פרויקט פרטי וניסיוני, שאינו משויך רשמית לגלגל"צ. לחיצה על שליחה מסירה כל אחריות מיוצר הפלייליסט לגבי הצבה, קידום, הכנסות או תוצאה כלשהי.
         </div>
         <label class="checkbox-wrap">
           <input type="checkbox" id="agree" />
-          <span>קראתי והסכמתי לכל האמור לעיל</span>
+          <span>אני מבין/ה שהשיר עובר ביקורת ידנית ואין הבטחה שייכנס לפלייליסט</span>
+        </label>
+        <label class="checkbox-wrap">
+          <input type="checkbox" id="agree-listen" />
+          <span>אני מתחייב/ת לשמור את הפלייליסט ולהאזין לכמה שירים ממנו לפחות פעם בחודש</span>
+        </label>
+        <label class="checkbox-wrap">
+          <input type="checkbox" id="agree-liability" />
+          <span>קראתי את כוכבית האחריות ומסכים/ה לתנאים</span>
         </label>
       </div>
 
       <div class="terms" style="margin-top: 1rem;">
         <div class="terms-title">קבלת עדכונים</div>
         <div class="terms-text">
-          בחירה בתיבה זו מעניקה הסכמה לקבל מיילים ועדכונים מ Ignite Records, כולל עדכונים על הפלייליסט והזדמנויות חדשות.
+          בחירה בתיבה זו מעניקה הסכמה לקבל מיילים ועדכונים מ־Ignite Records.
         </div>
         <label class="checkbox-wrap">
           <input type="checkbox" id="agree-marketing" />
-          <span>אני מסכים/ה לקבל עדכונים מ Ignite Records</span>
+          <span>אני מסכים/ה לקבל עדכונים מ־Ignite Records</span>
         </label>
       </div>
 
       <button class="btn-submit" id="btn" onclick="submitForm()">שלח הרשמה</button>
       <p id="msg"></p>
+      <div id="successBox" style="display:none;margin-top:1rem;padding:1rem;border:1px solid var(--fire);border-radius:8px;text-align:center;color:var(--fire);">
+        <strong>הפרטים נשלחו בהצלחה</strong><br>
+        <span style="color:var(--text-muted);font-size:0.85rem">נחזור אליך במייל אם תאושר או תידחה ההרשמה.</span>
+      </div>
     </div>
 
     <div class="footer">
@@ -368,9 +376,13 @@
       const spotify = document.getElementById('spotify').value.trim();
       const artistId = document.getElementById('artist-id').value.trim();
       const agree = document.getElementById('agree').checked;
+      const agreeListen = document.getElementById('agree-listen').checked;
+      const agreeLiability = document.getElementById('agree-liability').checked;
       const marketing = document.getElementById('agree-marketing').checked;
       const msg = document.getElementById('msg');
       const btn = document.getElementById('btn');
+      const successBox = document.getElementById('successBox');
+      if (successBox) successBox.style.display = 'none';
 
       msg.className = '';
       if (!name || !stagename || !email || !spotify) {
@@ -382,8 +394,8 @@
       if (!artistId) {
         msg.className = 'error'; msg.textContent = 'נא להכניס קישור תקין לדף אמן בספוטיפיי'; return;
       }
-      if (!agree) {
-        msg.className = 'error'; msg.textContent = 'יש לאשר את ההצהרה כדי להמשיך'; return;
+      if (!agree || !agreeListen || !agreeLiability) {
+        msg.className = 'error'; msg.textContent = 'יש לאשר את כל תיבות ההסכמה הנדרשות'; return;
       }
 
       btn.disabled = true;
@@ -405,7 +417,8 @@
           })
         });
         msg.className = 'success';
-        msg.textContent = 'תודה! הפרטים נשלחו בהצלחה. נחזור אליך בקרוב.';
+        msg.textContent = '';
+        if (successBox) successBox.style.display = 'block';
         document.querySelectorAll('input').forEach(i => i.disabled = true);
         btn.disabled = true;
       } catch(e) {

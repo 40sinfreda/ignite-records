@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galgalatz Live — Ignite Records</title>
+  <meta name="description" content="Galgalatz Live playlist by Ignite Records — independent fan project inspired by songs aired on Galgalatz." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css" />
+  <style>
+    .lp-hero { background: var(--bg2); padding: 2.5rem 1.25rem 2rem; text-align: center; border-bottom: 1px solid var(--line); }
+    .lp-cover { width: 100%; max-width: 320px; margin: 0 auto 1.25rem; border-radius: 10px; box-shadow: 0 12px 40px rgba(0,0,0,0.45); }
+    .lp-badge { display: inline-block; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fire); border: 1px solid var(--line); padding: 0.35rem 0.75rem; border-radius: 999px; margin-bottom: 0.75rem; }
+    .lp-title { font-family: 'Bebas Neue', Impact, sans-serif; font-size: clamp(2rem, 5vw, 3rem); letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .lp-lead { color: var(--muted); max-width: 560px; margin: 0 auto 1.5rem; }
+    .lp-section { padding: 2.5rem 1.25rem; }
+    .lp-section h2 { font-family: 'Bebas Neue', Impact, sans-serif; letter-spacing: 0.08em; font-size: 1.6rem; margin-bottom: 1rem; color: var(--fire); }
+    .steps { list-style: none; counter-reset: step; display: grid; gap: 1rem; }
+    .steps li { background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.1rem 1rem 3.2rem; position: relative; }
+    .steps li::before { counter-increment: step; content: counter(step); position: absolute; left: 0.9rem; top: 1rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--fire); color: var(--bg); font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; }
+    .disclaimer { margin-top: 1.5rem; padding: 1rem 1.1rem; background: rgba(245,166,35,0.06); border-left: 3px solid var(--fire); color: var(--muted); font-size: 0.9rem; }
+    .disclaimer strong { color: var(--text); }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 1.25rem; }
+    .embed-wrap { margin-top: 1.5rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="inner">
+      <a href="index.html" class="logo" aria-label="Ignite Records home"><img class="logo-nav-img" src="brand/logo-nav.jpg" alt="Ignite Records" /></a>
+      <div class="nav-links">
+        <a href="index.html#playlists">Playlists</a>
+        <a href="galgalatz-live.html">Submit</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="lp-hero">
+    <div class="lp-badge">Live radio-inspired mix</div>
+    <img class="lp-cover" src="brand/glive.jpg" alt="Galgalatz Live" />
+    <h1 class="lp-title">Galgalatz Live</h1>
+    <p class="lp-lead">A living playlist inspired by tracks aired on Galgalatz, with independent artist placements every 5 songs. Not an official Galgalatz product.</p>
+    <div class="cta-row">
+      <a class="btn" href="https://open.spotify.com/playlist/2sCgMi2KCgRfeqWIdjJNxv" target="_blank" rel="noopener">Open on Spotify</a>
+      <a class="btn outline" href="galgalatz-live.html">Submit Your Track</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="lp-section container-sm">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li><strong>Chart source.</strong> Tracks are curated to reflect the energy of songs played on air; approved artist submissions are planted every 5 positions.</li>
+        <li><strong>Artist slots.</strong> Every 5th track can feature an approved submission from independent artists.</li>
+        <li><strong>Review.</strong> Every submission is reviewed manually. Inclusion is never guaranteed.</li>
+        <li><strong>Weekly refresh.</strong> Updated on a rolling basis as the mix is refreshed. The playlist is fully rebuilt — old tracks are replaced.</li>
+        <li><strong>Your part.</strong> Save the playlist and listen to several tracks at least once a month so the community stays active.</li>
+      </ol>
+      <div class="disclaimer">
+        <strong>*</strong> This is a <strong>private, experimental project</strong> run independently by Ignite Records.
+        It is not affiliated with Billboard, Beatport, Spotify, or any radio station unless explicitly stated.
+        By submitting a track you acknowledge that the playlist operator assumes no liability for placement, promotion, revenue, or outcomes of any kind.
+      </div>
+    </section>
+
+    <section class="lp-section container-sm" style="padding-top:0">
+      <h2>Listen</h2>
+      <div class="embed-wrap">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2sCgMi2KCgRfeqWIdjJNxv?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+      <div class="cta-row">
+        <a class="btn" href="galgalatz-live.html">Submit Your Track</a>
+        <a class="btn outline" href="https://open.spotify.com/playlist/2sCgMi2KCgRfeqWIdjJNxv" target="_blank" rel="noopener">Open on Spotify</a>
+      </div>
+    </section>
+  </main>
+
+  <footer><p>© 2026 Ignite Records · <a href="index.html">Home</a> · Experimental playlist project</p></footer>
+</body>
+</html>

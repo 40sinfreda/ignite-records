@@ -3,43 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Submit Trance Track — Global Trance Hits · Ignite Records</title>
+  <title>Submit Track — Global Trance Hits · Ignite Records</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/site.css" />
+  <style>
+    .success-box {
+      display: none; margin-top: 1.25rem; padding: 1.25rem 1.35rem;
+      border: 1px solid var(--fire); border-radius: 10px;
+      background: rgba(245,166,35,0.08); text-align: center;
+    }
+    .success-box.show { display: block; }
+    .success-box h3 { font-family: 'Bebas Neue', Impact, sans-serif; letter-spacing: 0.08em; color: var(--fire); margin-bottom: 0.4rem; }
+    .star-note { font-size: 0.85rem; color: var(--muted); margin-top: 1rem; line-height: 1.5; }
+  </style>
 </head>
 <body>
   <nav>
     <div class="inner">
       <a href="index.html" class="logo" aria-label="Ignite Records home"><img class="logo-nav-img" src="brand/logo-nav.jpg" alt="Ignite Records" /></a>
-      <a href="index.html" style="font-size:0.85rem;font-weight:600">← Back</a>
+      <a href="playlist-trance.html" style="font-size:0.85rem;font-weight:600">← About this playlist</a>
     </div>
   </nav>
   <main class="container-sm" style="padding:2.5rem 1.25rem 4rem">
-    <img src="brand/global-trance-hits.png" alt="Global Trance Hits" style="max-width:420px;width:100%;border-radius:8px;margin:0 auto 1.5rem;display:block" />
-    <h1 class="section-title" style="text-align:left;margin-bottom:0.5rem">Submit Your Trance Track</h1>
-    <p style="color:var(--muted);margin-bottom:2rem">
-      Apply to feature in <strong>Global Trance Hits</strong> — Beatport Trance Top 100 mixed with selected artists, updated every Tuesday.
-      Approved tracks are planted every 5 songs.
-    </p>
+    <img src="brand/global-trance-hits.png" alt="Global Trance Hits" style="width:100%;max-width:420px;border-radius:8px;margin:0 auto 1.5rem;display:block" />
+    <h1 class="section-title" style="text-align:left;margin-bottom:0.5rem">Submit Your Track</h1>
+    <p style="color:var(--muted);margin-bottom:1.5rem">Apply to feature in Global Trance Hits. Approved tracks are planted every 5 songs. Updated every Tuesday.</p>
+    <p style="margin-bottom:1.5rem"><a class="btn outline" href="https://open.spotify.com/playlist/6LVMs3vAwFV0gkwrCxLN8P" target="_blank" rel="noopener">Open playlist on Spotify</a></p>
+
     <form id="f">
-      <div class="form-group"><label>Full Name *</label><input name="fullname" id="fullname" required /></div>
-      <div class="form-group"><label>Artist / Stage Name *</label><input name="stagename" id="stagename" required /></div>
-      <div class="form-group"><label>Email *</label><input name="email" id="email" type="email" required /></div>
+      <div class="form-group"><label>Full Name *</label><input id="fullname" required /></div>
+      <div class="form-group"><label>Artist / Stage Name *</label><input id="stagename" required /></div>
+      <div class="form-group"><label>Email *</label><input id="email" type="email" required /></div>
       <div class="form-group">
         <label>Spotify Track Link *</label>
-        <input name="trackurl" id="trackurl" type="url" placeholder="https://open.spotify.com/track/..." required oninput="extractTrack(this.value)" />
+        <input id="trackurl" type="url" placeholder="https://open.spotify.com/track/..." required oninput="extractTrack(this.value)" />
         <p id="trackHint" style="font-size:0.8rem;color:var(--muted);margin-top:0.4rem"></p>
       </div>
-      <label class="check"><input type="checkbox" id="rights" required /> I confirm I hold the rights to this track and inclusion is not guaranteed.</label>
-      <label class="check"><input type="checkbox" id="marketing" name="marketing" /> Send me updates from Ignite Records.</label>
-      <button type="submit" class="btn" id="btn" style="width:100%;margin-top:1rem">Submit Track</button>
+
+      <label class="check">
+        <input type="checkbox" id="review" required />
+        I understand my track goes through manual review and may be approved or declined — inclusion is not guaranteed.
+      </label>
+      <label class="check">
+        <input type="checkbox" id="listen" required />
+        I agree to save the playlist and listen to several tracks from it at least once a month.
+      </label>
+      <label class="check">
+        <input type="checkbox" id="marketing" />
+        Send me updates from Ignite Records.
+      </label>
+
+      <p class="star-note">
+        <strong>*</strong> This is a private, experimental project. By clicking Submit you acknowledge that the playlist operator
+        assumes no liability for placement, promotion, streams, revenue, or any outcome related to your submission.
+      </p>
+
+      <button type="submit" class="btn" id="btn" style="width:100%;margin-top:1.25rem">Submit Track</button>
       <p class="msg" id="msg" hidden></p>
+      <div class="success-box" id="successBox">
+        <h3>Track submitted</h3>
+        <p>Your song was sent successfully. We’ll email you when it’s approved or declined.</p>
+      </div>
     </form>
   </main>
-  <footer><p>© 2026 Ignite Records · <a href="index.html">Home</a></p></footer>
+  <footer><p>© 2026 Ignite Records · <a href="playlist-trance.html">About playlist</a> · <a href="index.html">Home</a></p></footer>
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyJo7u1MJdSd2vWXtCB8WVk7PY-ICkoqeFnLa8XJGlP4kh1grqTfawSN9535snpv8mK/exec";
+    const FORM_NAME = "trance";
     let trackId = "";
 
     function extractTrack(url) {
@@ -55,22 +86,23 @@
       e.preventDefault();
       const msg = document.getElementById("msg");
       const btn = document.getElementById("btn");
+      const successBox = document.getElementById("successBox");
       const fullname = document.getElementById("fullname").value.trim();
       const stagename = document.getElementById("stagename").value.trim();
       const email = document.getElementById("email").value.trim();
       const trackurl = document.getElementById("trackurl").value.trim();
       extractTrack(trackurl);
-
+      successBox.classList.remove("show");
       msg.hidden = false;
+
       if (!fullname || !stagename || !email || !trackurl) {
-        msg.className = "msg err";
-        msg.textContent = "Please fill in all required fields.";
-        return;
+        msg.className = "msg err"; msg.textContent = "Please fill in all required fields."; return;
       }
       if (!trackId) {
-        msg.className = "msg err";
-        msg.textContent = "Enter a valid Spotify track link.";
-        return;
+        msg.className = "msg err"; msg.textContent = "Enter a valid Spotify track link."; return;
+      }
+      if (!document.getElementById("review").checked || !document.getElementById("listen").checked) {
+        msg.className = "msg err"; msg.textContent = "Please accept the required commitments."; return;
       }
 
       btn.disabled = true;
@@ -81,17 +113,19 @@
           mode: "no-cors",
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify({
-            form: "trance",
+            form: FORM_NAME,
             fullname: fullname,
             stagename: stagename,
             email: email,
             trackurl: trackurl,
             trackId: trackId,
-            marketing: document.getElementById("marketing").checked
+            marketing: document.getElementById("marketing").checked,
+            agreedReview: true,
+            agreedListen: true
           })
         });
-        msg.className = "msg ok";
-        msg.textContent = "Submitted! We’ll review your track for Global Trance Hits.";
+        msg.hidden = true;
+        successBox.classList.add("show");
         document.getElementById("f").reset();
         trackId = "";
         document.getElementById("trackHint").textContent = "";
