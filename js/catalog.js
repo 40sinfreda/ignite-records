@@ -101,7 +101,7 @@ window.IGNITE = {
       desc: "The hub for high-energy tech, psy, and uplifting trance. Handpicked underground cuts and global anthems, updated every Tuesday.",
       cover: "brand/global-trance-hits.png",
       spotifyId: "6LVMs3vAwFV0gkwrCxLN8P",
-      submit: "submit-trance.html"
+      submit: "playlist-trance.html"
     },
     {
       id: "top100",
@@ -110,7 +110,7 @@ window.IGNITE = {
       desc: "The best songs in America, updated every Thursday. 100 tracks featuring the biggest hits alongside selected Ignite Records artists.",
       cover: "brand/top100.jpg",
       spotifyId: "1X6UzSIauC4xc061NcFL2w",
-      submit: "submission.html"
+      submit: "playlist-top100-us.html"
     },
     {
       id: "galgalatz",
@@ -119,7 +119,7 @@ window.IGNITE = {
       desc: "Playlist synced in real time with songs aired on Galgalatz. Approved artists are planted every 5 tracks. Independent fan project — not officially affiliated with the station.",
       cover: "brand/glive.jpg",
       spotifyId: "2sCgMi2KCgRfeqWIdjJNxv",
-      submit: "galgalatz-live.html"
+      submit: "playlist-galgalatz.html"
     }
   ]
 };
