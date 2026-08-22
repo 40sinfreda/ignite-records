@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>גלגלצ מתעדכן LIVE - שליחת שיר</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fire: #F5A623;
+      --fire-dark: #E07B00;
+      --bg: #0D0D0D;
+      --bg2: #151515;
+      --bg3: #1E1E1E;
+      --text: #F0EDE8;
+      --text-muted: #A8A89E;
+      --border: rgba(245,166,35,0.15);
+      --error: #ff6060;
+      --success: #60ffb0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 3rem 1rem;
+      direction: rtl;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(245,166,35,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 560px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo h1 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2rem;
+      letter-spacing: 0.15em;
+      color: var(--fire);
+    }
+
+    .logo h1 span { color: var(--text); }
+
+    .logo p {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--fire), transparent);
+      margin: 1.5rem auto;
+    }
+
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+    }
+
+    .card-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .field {
+      margin-bottom: 1.2rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    input[type=text], input[type=email], input[type=url] {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input::placeholder { color: #555; }
+    input:focus { border-color: var(--fire); }
+    input[readonly] { color: var(--text-muted); cursor: default; }
+
+    .id-row { display: none; }
+    .id-wrap { display: flex; gap: 8px; align-items: center; }
+    .id-check { font-size: 20px; flex-shrink: 0; }
+
+    .terms {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .terms-title {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fire);
+      margin-bottom: 0.8rem;
+    }
+
+    .terms-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .checkbox-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      cursor: pointer;
+      margin-bottom: 0.7rem;
+    }
+
+    .checkbox-wrap input[type=checkbox] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--fire);
+      flex-shrink: 0;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    .checkbox-wrap span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--fire);
+      color: var(--bg);
+      border: none;
+      border-radius: 2px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, opacity 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit:hover { background: var(--fire-dark); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    #msg {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+    #msg.error { color: var(--error); }
+    #msg.success { color: var(--success); }
+
+    .footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .footer a { color: var(--fire); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="logo">
+      <h1>גלגלצ <span>מתעדכן</span> LIVE</h1>
+      <p>שליחת שיר לפלייליסט ביוטיוב</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="card" style="margin-bottom: 1.5rem;">
+      <div class="card-title">גלגלצ מתעדכן LIVE</div>
+      <p class="card-subtitle" style="margin-bottom:1.2rem;">
+        הפלייליסט ביוטיוב מתעדכן בזמן אמת עם השירים שמתנגנים בגלגל"צ.<br>
+        כל 5 שירים אנחנו שותלים שיר מאושר של אמן מהקהילה.
+        <br><br>
+        <span style="font-size:0.75rem; color:#999;">* הפלייליסט הוא עצמאי ואין לו שום קשר רשמי לתחנת גלגל"צ.</span>
+      </p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin-bottom:1.5rem;">
+        <div style="text-align:center; background:var(--bg3); border:1px solid var(--border); padding:1rem 0.5rem;">
+          <div style="font-family:'Bebas Neue',cursive; font-size:2rem; color:var(--fire);">LIVE</div>
+          <div style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-top:0.2rem;">בזמן אמת</div>
+        </div>
+        <div style="text-align:center; background:var(--bg3); border:1px solid var(--border); padding:1rem 0.5rem;">
+          <div style="font-family:'Bebas Neue',cursive; font-size:2rem; color:var(--fire);">5</div>
+          <div style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-top:0.2rem;">כל 5 שירים</div>
+        </div>
+        <div style="text-align:center; background:var(--bg3); border:1px solid var(--border); padding:1rem 0.5rem;">
+          <div style="font-family:'Bebas Neue',cursive; font-size:2rem; color:var(--fire);">YT</div>
+          <div style="font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--text-muted); margin-top:0.2rem;">יוטיוב</div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg3); border:1px solid var(--border); padding:1.2rem;">
+        <div style="font-size:0.65rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--fire); margin-bottom:0.8rem;">איך זה עובד</div>
+        <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.9;">
+          השיר שלך נשלח לביקורת ידנית. אם הוא מאושר – הוא יישתל בפלייליסט ביוטיוב כל 5 שירים של גלגל"צ.
+          כך המאזינים רואים ושומעים אותך בתוך הפלייליסט החי.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">שליחת שיר</div>
+      <p class="card-subtitle">מלאו את הפרטים. רק קישור ליוטיוב מתקבל.</p>
+
+      <div class="field">
+        <label>שם מלא *</label>
+        <input type="text" id="fullname" placeholder="שם פרטי ושם משפחה" />
+      </div>
+
+      <div class="field">
+        <label>שם במה *</label>
+        <input type="text" id="stagename" placeholder="השם שבו אתה מוכר כאמן" />
+      </div>
+
+      <div class="field">
+        <label>כתובת מייל *</label>
+        <input type="email" id="email" placeholder="your@email.com" />
+      </div>
+
+      <div class="field">
+        <label>קישור ליוטיוב של השיר *</label>
+        <input type="url" id="youtube" placeholder="https://www.youtube.com/watch?v=..." oninput="extractVideoId(this.value)" />
+      </div>
+
+      <div class="field id-row" id="id-row">
+        <label>מזהה וידאו ביוטיוב</label>
+        <div class="id-wrap">
+          <input type="text" id="video-id" readonly />
+          <span class="id-check" id="id-check"></span>
+        </div>
+      </div>
+
+      <div class="terms">
+        <div class="terms-title">הצהרה והסכמה</div>
+        <div class="terms-text">
+          * זהו פרויקט פרטי וניסיוני, שאינו משויך רשמית לגלגל"צ. לחיצה על שליחה מסירה כל אחריות מיוצר הפלייליסט לגבי הצבה, קידום, הכנסות או תוצאה כלשהי.
+        </div>
+        <label class="checkbox-wrap">
+          <input type="checkbox" id="agree" />
+          <span>אני מבין/ה שהשיר עובר ביקורת ידנית ואין הבטחה שייכנס לפלייליסט</span>
+        </label>
+        <label class="checkbox-wrap">
+          <input type="checkbox" id="agree-listen" />
+          <span>אני מתחייב/ת לשמור את הפלייליסט ולהאזין לכמה שירים ממנו לפחות פעם בחודש</span>
+        </label>
+        <label class="checkbox-wrap">
+          <input type="checkbox" id="agree-liability" />
+          <span>קראתי את כוכבית האחריות ומסכים/ה לתנאים</span>
+        </label>
+      </div>
+
+      <div class="terms" style="margin-top: 1rem;">
+        <div class="terms-title">קבלת עדכונים</div>
+        <label class="checkbox-wrap">
+          <input type="checkbox" id="agree-marketing" />
+          <span>אני מסכים/ה לקבל עדכונים מ־Ignite Records</span>
+        </label>
+      </div>
+
+      <button class="btn-submit" id="btn" onclick="submitForm()">שלח שיר</button>
+      <p id="msg"></p>
+      <div id="successBox" style="display:none;margin-top:1rem;padding:1rem;border:1px solid var(--fire);border-radius:8px;text-align:center;color:var(--fire);">
+        <strong>השיר נשלח בהצלחה</strong><br>
+        <span style="color:var(--text-muted);font-size:0.85rem">נחזור אליך במייל אם תאושר או תידחה הבקשה.</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      &copy; 2026 Ignite Records &nbsp;&middot;&nbsp; <a href="https://igniterecords26.com/">igniterecords26.com</a>
+    </div>
+
+  </div>
+
+  <script>
+    // TODO: החלף בכתובת ה-Apps Script שלך אחרי שניצור אותו
+    const SCRIPT_URL = 'REPLACE_WITH_YOUR_SCRIPT_URL';
+
+    function extractVideoId(url) {
+      const patterns = [
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([A-Za-z0-9_-]{11})/,
+        /youtube\.com\/watch\?.*v=([A-Za-z0-9_-]{11})/
+      ];
+      const row = document.getElementById('id-row');
+      const idField = document.getElementById('video-id');
+      const check = document.getElementById('id-check');
+      
+      let videoId = '';
+      for (const p of patterns) {
+        const m = url.match(p);
+        if (m) { videoId = m[1]; break; }
+      }
+
+      if (videoId) {
+        idField.value = videoId;
+        check.textContent = '✓';
+        check.style.color = '#60ffb0';
+        row.style.display = 'block';
+      } else if (url.length > 10) {
+        idField.value = '';
+        check.textContent = '✗';
+        check.style.color = '#ff6060';
+        row.style.display = 'block';
+      } else {
+        row.style.display = 'none';
+      }
+    }
+
+    async function submitForm() {
+      const fullname = document.getElementById('fullname').value.trim();
+      const stagename = document.getElementById('stagename').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const youtube = document.getElementById('youtube').value.trim();
+      const videoId = document.getElementById('video-id').value.trim();
+      const agree = document.getElementById('agree').checked;
+      const agreeListen = document.getElementById('agree-listen').checked;
+      const agreeLiability = document.getElementById('agree-liability').checked;
+      const marketing = document.getElementById('agree-marketing').checked;
+      const msg = document.getElementById('msg');
+      const btn = document.getElementById('btn');
+      const successBox = document.getElementById('successBox');
+      if (successBox) successBox.style.display = 'none';
+
+      msg.className = '';
+      if (!fullname || !stagename || !email || !youtube) {
+        msg.className = 'error'; msg.textContent = 'נא למלא את כל השדות החובה'; return;
+      }
+      if (!email.includes('@')) {
+        msg.className = 'error'; msg.textContent = 'כתובת מייל לא תקינה'; return;
+      }
+      if (!videoId) {
+        msg.className = 'error'; msg.textContent = 'נא להכניס קישור תקין ליוטיוב'; return;
+      }
+      if (!agree || !agreeListen || !agreeLiability) {
+        msg.className = 'error'; msg.textContent = 'יש לאשר את כל תיבות ההסכמה הנדרשות'; return;
+      }
+
+      if (SCRIPT_URL === 'REPLACE_WITH_YOUR_SCRIPT_URL') {
+        msg.className = 'error';
+        msg.textContent = 'הטופס עדיין לא מחובר לשרת. נא להשלים את הגדרת ה-Apps Script.';
+        return;
+      }
+
+      btn.disabled = true;
+      msg.textContent = 'שולח...';
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            form: 'galgalatz-yt',
+            fullname: fullname,
+            stagename: stagename,
+            email: email,
+            youtube: youtube,
+            videoId: videoId,
+            marketing: marketing
+          })
+        });
+        msg.className = 'success';
+        msg.textContent = '';
+        if (successBox) successBox.style.display = 'block';
+        document.querySelectorAll('input').forEach(i => i.disabled = true);
+        btn.disabled = true;
+      } catch(e) {
+        msg.className = 'error';
+        msg.textContent = 'שגיאה בשליחה, נסה שוב.';
+        btn.disabled = false;
+      }
+    }
+  </script>
+
+</body>
+</html>
