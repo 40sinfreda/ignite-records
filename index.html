@@ -120,7 +120,7 @@
           : "https://open.spotify.com/playlist/" + p.spotifyId;
         var openLabel = isYoutube ? "Open on YouTube" : "Open on Spotify";
         var embed = isYoutube
-          ? '<iframe width="100%" height="380" src="https://www.youtube.com/embed/videoseries?list=' + p.youtubePlaylistId + '" title="' + p.title + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" style="border-radius:12px;border:0"></iframe>'
+          ? '<iframe width="100%" height="380" src="https://www.youtube.com/embed?listType=playlist&list=' + p.youtubePlaylistId + '" title="' + p.title + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" style="border-radius:12px;border:0"></iframe>'
           : '<iframe class="spotify" title="' + p.title + '" src="https://open.spotify.com/embed/playlist/' + p.spotifyId + '?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
 
         sec.innerHTML =
