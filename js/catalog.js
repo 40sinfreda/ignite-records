@@ -120,6 +120,15 @@ window.IGNITE = {
       cover: "brand/glive.jpg",
       spotifyId: "2sCgMi2KCgRfeqWIdjJNxv",
       submit: "playlist-galgalatz.html"
+    },
+    {
+      id: "galgalatz-yt",
+      title: "גלגלצ מתעדכן LIVE",
+      label: "YouTube · Live",
+      desc: "פלייליסט דינמי ביוטיוב בהשראת שירים שמשודרים בגלגלצ. אמנים מאושרים נשתלים כל 5 שירים. פרויקט עצמאי — ללא קשר רשמי לתחנה.",
+      cover: "brand/glive.jpg",
+      youtubePlaylistId: "PLZIA7pKbjpTU",
+      submit: "playlist-galgalatz-youtube.html"
     }
   ]
 };
