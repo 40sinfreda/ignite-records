@@ -129,9 +129,16 @@ section { padding: 4rem 1.25rem; }
 .btn.outline { background: transparent; color: var(--fire); border: 1px solid var(--fire); }
 .btn.outline:hover { background: var(--fire); color: var(--bg); }
 iframe.spotify {
-  width: 100%; height: 380px; border: 0;
-  border-radius: 12px; border: 1px solid var(--line);
+  width: 100%;
+  min-height: 380px;
+  height: 380px;
+  border: 0;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  display: block;
+  background: #121212;
 }
+.embed-wrap { overflow: visible; }
 
 .playlist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
 .playlist-cover {
@@ -199,7 +206,7 @@ iframe.spotify {
 .album-list { max-width: 900px; margin: 0 auto; }
 .album-block {
   background: var(--bg2); border: 1px solid var(--line);
-  border-radius: 4px; padding: 1.75rem; margin-bottom: 1.75rem;
+  border-radius: 4px; padding: 1.75rem; margin-bottom: 1.75rem; overflow: visible;
 }
 .album-block h3 {
   font-family: 'Bebas Neue', Impact, sans-serif;
@@ -249,5 +256,11 @@ footer {
   .album-row, .playlist-grid, .playlist-cards { grid-template-columns: 1fr; }
   .artists-grid { gap: 0.75rem; max-width: 100%; }
   .artist-hero img { width: 220px; height: 220px; }
-  iframe.spotify { height: 352px; }
+  .album-block { padding: 1rem; }
+  .btn { width: 100%; }
+  iframe.spotify {
+    width: 100%;
+    min-height: 420px;
+    height: 420px;
+  }
 }
