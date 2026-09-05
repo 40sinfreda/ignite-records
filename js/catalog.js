@@ -15,6 +15,7 @@ window.IGNITE = {
         "Follow the journey on Spotify and YouTube as the catalog keeps growing."
       ],
       albums: [
+        { title: "BEAUTIFUL DISASTER", id: "5KhQQ68HQwAva4oaizWKQ5" },
         { title: "Happy Days", id: "1VKxMF9LDjn9fFZ6SXQ1EQ" },
         { title: "CAN YOU HEAR ME?", id: "5cJ9rVCakOabCrVg4gzw1K" }
       ]
