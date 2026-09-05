@@ -129,6 +129,15 @@ window.IGNITE = {
       cover: "brand/glive.jpg",
       youtubePlaylistId: "PLZIA7pKbjpTU",
       submit: "playlist-galgalatz-youtube.html"
+    },
+    {
+      id: "gym-hits",
+      title: "IGNITE GYM HITS",
+      label: "Weekly workout",
+      desc: "High-energy workout mix from Billboard Dance/Pop, Dance/Electronic and the Hot 100. Approved independent tracks every 5 songs. Updated every Wednesday.",
+      cover: "brand/ignite-gym-hits.svg",
+      spotifyId: "61zQs4WdaOjzkXC3ctR4ZU",
+      submit: "playlist-gym-hits.html"
     }
   ]
 };
