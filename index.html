@@ -8,7 +8,16 @@
   <meta name="theme-color" content="#0D0D0D" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/site.css?v=20260905f" />
+  <link rel="stylesheet" href="css/site.css?v=20260905g" />
+  <style>
+    .stories-wrap { padding: 10px 0 8px !important; background: #151515; border-bottom: 1px solid rgba(245,166,35,0.16); }
+    .stories { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; gap: 12px; overflow-x: auto; overflow-y: hidden; padding: 4px 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .stories::-webkit-scrollbar { display: none; }
+    .story { flex: 0 0 72px !important; width: 72px !important; max-width: 72px !important; text-align: center; color: #F0EDE8; text-decoration: none; }
+    .story-ring { display: block; width: 64px; height: 64px; margin: 0 auto 4px; padding: 2px; border-radius: 50%; background: linear-gradient(135deg, #F5A623, #ffd27a 45%, #E07B00); }
+    .story-ring img { width: 60px !important; height: 60px !important; max-width: 60px !important; object-fit: cover; border-radius: 50%; border: 2px solid #151515; display: block; }
+    .story-label { display: block; font-size: 10px; line-height: 1.2; color: #A8A89E; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  </style>
 </head>
 <body>
   <nav>
@@ -23,9 +32,9 @@
       </div>
     </div>
   </nav>
-  <section class="stories-wrap" aria-label="Playlists and albums">
+  <div class="stories-wrap" aria-label="Playlists and albums">
     <div class="stories" id="storiesBar"></div>
-  </section>
+  </div>
   <header class="hero">
     <img class="logo-img" src="brand/logo-hero.jpg" alt="Ignite Records — Independent · Original" />
     <p class="tag">Music Label</p>
@@ -58,7 +67,7 @@
     </div>
   </section>
   <footer><p>© 2026 Ignite Records. All rights reserved. · <a href="index.html">Home</a></p></footer>
-  <script src="js/catalog.js?v=20260905f"></script>
+  <script src="js/catalog.js?v=20260905g"></script>
   <script src="js/nav.js"></script>
   <script>
     (function () {
@@ -90,8 +99,8 @@
         a.className = "story" + (extraClass ? " " + extraClass : "");
         a.href = href;
         if (external) { a.target = "_blank"; a.rel = "noopener"; }
-        var short = label.length > 14 ? label.slice(0, 13) + "…" : label;
-        a.innerHTML = '<span class="story-ring"><img src="' + img + '" alt="' + label + '" /></span><span class="story-label">' + short + '</span>';
+        var short = label.length > 12 ? label.slice(0, 11) + "…" : label;
+        a.innerHTML = '<span class="story-ring"><img src="' + img + '" alt="' + label + '" width="60" height="60" /></span><span class="story-label">' + short + '</span>';
         parent.appendChild(a);
       }
       var stories = document.getElementById("storiesBar");
