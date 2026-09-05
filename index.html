@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0D0D0D" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/site.css?v=20260905d" />
+  <link rel="stylesheet" href="css/site.css?v=20260905e" />
 </head>
 <body>
   <nav>
@@ -55,7 +55,7 @@
     </div>
   </section>
   <footer><p>© 2026 Ignite Records. All rights reserved. · <a href="index.html">Home</a></p></footer>
-  <script src="js/catalog.js?v=20260905d"></script>
+  <script src="js/catalog.js?v=20260905e"></script>
   <script src="js/nav.js"></script>
   <script>
     (function () {
@@ -75,10 +75,14 @@
         var row = document.createElement("div");
         row.className = "album-row";
         row.innerHTML =
-          '<div><h3>' + a.name + '<br>' + album.title + '</h3><p>Stream the full catalog and latest release on Spotify. Open the artist page for every album.</p><div class="btn-row"><a class="btn" href="https://open.spotify.com/album/' + album.id + '" target="_blank" rel="noopener">Listen on Spotify</a>' +
+          '<div><h3>' + a.name + '<br>' + album.title + '</h3><p>Stream the full catalog and latest release on Spotify. Open the artist page for every album.</p></div>' +
+          '<div>' +
+          '<iframe class="spotify" title="' + a.name + '" src="https://open.spotify.com/embed/album/' + album.id + '?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>' +
+          '<div class="btn-row">' +
+          '<a class="btn" href="https://open.spotify.com/album/' + album.id + '" target="_blank" rel="noopener">Listen on Spotify</a>' +
           (a.youtube ? '<a class="btn outline" href="' + a.youtube + '" target="_blank" rel="noopener">YouTube</a>' : '') +
-          '<a class="btn outline" href="artist.html?slug=' + encodeURIComponent(a.slug) + '">All albums</a></div></div>' +
-          '<div><iframe class="spotify" title="' + a.name + '" src="https://open.spotify.com/embed/album/' + album.id + '?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>';
+          '<a class="btn outline" href="artist.html?slug=' + encodeURIComponent(a.slug) + '">All albums</a>' +
+          '</div></div>';
         releases.appendChild(row);
       });
       var playRoot = document.getElementById("playlistCards");
