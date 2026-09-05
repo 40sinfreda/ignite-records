@@ -41,7 +41,11 @@
     <div class="container" id="releasesList"></div>
   </section>
 
-  <div id="playlists"></div>
+  <section id="playlists" class="bg2">
+    <p class="section-label">Listen</p>
+    <h2 class="section-title">Playlists</h2>
+    <div class="container playlist-cards" id="playlistCards"></div>
+  </section>
 
   <section id="contact">
     <div class="container-sm">
@@ -108,48 +112,20 @@
         releases.appendChild(row);
       });
 
-      var playRoot = document.getElementById("playlists");
-      C.playlists.forEach(function (p, i) {
-        var sec = document.createElement("section");
-        sec.id = p.id;
-        if (i % 2 === 0) sec.className = "bg2";
-
-        var isYoutube = !!p.youtubePlaylistId;
-        var openUrl = isYoutube
-          ? "https://www.youtube.com/playlist?list=" + p.youtubePlaylistId
-          : "https://open.spotify.com/playlist/" + p.spotifyId;
-        var openLabel = isYoutube ? "Open on YouTube" : "Open on Spotify";
-
-        var rightSide;
-        if (isYoutube) {
-          rightSide =
-            '<a href="' + openUrl + '" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;">' +
-            '<div style="background:var(--bg2);border:1px solid var(--line);border-radius:12px;overflow:hidden;">' +
-            '<img src="' + p.cover + '" alt="' + p.title + '" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;" />' +
-            '<div style="padding:1.1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:0.75rem;flex-wrap:wrap;">' +
-            '<div><div style="font-family:\'Bebas Neue\',Impact,sans-serif;font-size:1.25rem;letter-spacing:0.05em;">' + p.title + '</div>' +
-            '<div style="color:var(--muted);font-size:0.85rem;margin-top:0.2rem;">Open full playlist on YouTube</div></div>' +
-            '<span class="btn" style="pointer-events:none;font-size:0.8rem;">Open on YouTube</span>' +
-            '</div></div></a>';
-        } else {
-          rightSide =
-            '<iframe class="spotify" title="' + p.title + '" src="https://open.spotify.com/embed/playlist/' + p.spotifyId + '?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
-        }
-
-        sec.innerHTML =
-          '<div class="container playlist-grid">' +
-          '<div>' +
-          '<img class="playlist-cover" src="' + p.cover + '" alt="' + p.title + '" />' +
-          '<p class="section-label" style="text-align:left">' + p.label + '</p>' +
-          '<h2>' + p.title + '</h2>' +
-          '<p style="color:var(--muted);margin-bottom:1.25rem;line-height:1.8">' + p.desc + '</p>' +
-          '<div class="btn-row">' +
-          '<a class="btn" href="' + openUrl + '" target="_blank" rel="noopener">' + openLabel + '</a>' +
-          '<a class="btn outline" href="' + p.submit + '">Submit Your Track</a>' +
-          '</div></div>' +
-          '<div>' + rightSide + '</div>' +
+      var playRoot = document.getElementById("playlistCards");
+      C.playlists.forEach(function (p) {
+        var card = document.createElement("a");
+        card.className = "playlist-card";
+        card.href = p.submit;
+        card.innerHTML =
+          '<img src="' + p.cover + '" alt="' + p.title + '" />' +
+          '<div class="playlist-card-body">' +
+          '<div class="playlist-card-label">' + p.label + '</div>' +
+          '<div class="playlist-card-title">' + p.title + '</div>' +
+          '<p>' + p.desc + '</p>' +
+          '<span class="playlist-card-link">Open playlist page →</span>' +
           '</div>';
-        playRoot.appendChild(sec);
+        playRoot.appendChild(card);
       });
 
       document.getElementById("contactForm").addEventListener("submit", function (e) {
