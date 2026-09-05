@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0D0D0D" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/site.css" />
+  <link rel="stylesheet" href="css/site.css?v=20260905b" />
 </head>
 <body>
   <nav>
@@ -23,57 +23,39 @@
       </div>
     </div>
   </nav>
-
   <header class="hero">
     <img class="logo-img" src="brand/logo-hero.jpg" alt="Ignite Records — Independent · Original" />
     <p class="tag">Music Label</p>
   </header>
-
   <section id="artists" class="bg2">
     <p class="section-label">Our Roster</p>
     <h2 class="section-title">The Artists</h2>
     <div class="artists-grid" id="artistsGrid"></div>
   </section>
-
   <section id="releases">
     <p class="section-label">Latest Releases</p>
     <h2 class="section-title">The Music</h2>
     <div class="container" id="releasesList"></div>
   </section>
-
   <section id="playlists" class="bg2">
     <p class="section-label">Listen</p>
     <h2 class="section-title">Playlists</h2>
     <div class="container playlist-cards" id="playlistCards"></div>
   </section>
-
   <section id="contact">
     <div class="container-sm">
       <h2 class="section-title">Get in Touch</h2>
       <form id="contactForm">
-        <div class="form-group">
-          <label for="name">Name *</label>
-          <input id="name" name="name" required />
-        </div>
-        <div class="form-group">
-          <label for="email">Email *</label>
-          <input id="email" name="email" type="email" required />
-        </div>
-        <div class="form-group">
-          <label for="message">Message *</label>
-          <textarea id="message" name="message" required></textarea>
-        </div>
+        <div class="form-group"><label for="name">Name *</label><input id="name" name="name" required /></div>
+        <div class="form-group"><label for="email">Email *</label><input id="email" name="email" type="email" required /></div>
+        <div class="form-group"><label for="message">Message *</label><textarea id="message" name="message" required></textarea></div>
         <button type="submit" class="btn" style="width:100%">Send Message</button>
         <p class="msg" id="contactMsg" hidden></p>
       </form>
     </div>
   </section>
-
-  <footer>
-    <p>© 2026 Ignite Records. All rights reserved. · <a href="index.html">Home</a></p>
-  </footer>
-
-  <script src="js/catalog.js"></script>
+  <footer><p>© 2026 Ignite Records. All rights reserved. · <a href="index.html">Home</a></p></footer>
+  <script src="js/catalog.js?v=20260905b"></script>
   <script src="js/nav.js"></script>
   <script>
     (function () {
@@ -83,14 +65,9 @@
         var el = document.createElement("a");
         el.className = "artist-card";
         el.href = "artist.html?slug=" + encodeURIComponent(a.slug);
-        el.innerHTML =
-          '<img src="' + a.photo + '" alt="' + a.name + '" />' +
-          '<div class="artist-info">' +
-          '<div class="artist-name">' + a.name + '</div>' +
-          '<div class="artist-genre">' + a.genre + '</div></div>';
+        el.innerHTML = '<img src="' + a.photo + '" alt="' + a.name + '" /><div class="artist-info"><div class="artist-name">' + a.name + '</div><div class="artist-genre">' + a.genre + '</div></div>';
         grid.appendChild(el);
       });
-
       var releases = document.getElementById("releasesList");
       C.artists.forEach(function (a) {
         var album = a.albums[0];
@@ -98,36 +75,20 @@
         var row = document.createElement("div");
         row.className = "album-row";
         row.innerHTML =
-          '<div>' +
-          '<h3>' + a.name + '<br>' + album.title + '</h3>' +
-          '<p>Stream the full catalog and latest release on Spotify. Open the artist page for every album.</p>' +
-          '<div class="btn-row">' +
-          '<a class="btn" href="https://open.spotify.com/album/' + album.id + '" target="_blank" rel="noopener">Listen on Spotify</a>' +
+          '<div><h3>' + a.name + '<br>' + album.title + '</h3><p>Stream the full catalog and latest release on Spotify. Open the artist page for every album.</p><div class="btn-row"><a class="btn" href="https://open.spotify.com/album/' + album.id + '" target="_blank" rel="noopener">Listen on Spotify</a>' +
           (a.youtube ? '<a class="btn outline" href="' + a.youtube + '" target="_blank" rel="noopener">YouTube</a>' : '') +
-          '<a class="btn outline" href="artist.html?slug=' + encodeURIComponent(a.slug) + '">All albums</a>' +
-          '</div></div>' +
-          '<div><iframe class="spotify" title="' + a.name + ' — ' + album.title + '" ' +
-          'src="https://open.spotify.com/embed/album/' + album.id + '?utm_source=generator&theme=0" ' +
-          'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>';
+          '<a class="btn outline" href="artist.html?slug=' + encodeURIComponent(a.slug) + '">All albums</a></div></div>' +
+          '<div><iframe class="spotify" title="' + a.name + '" src="https://open.spotify.com/embed/album/' + album.id + '?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>';
         releases.appendChild(row);
       });
-
       var playRoot = document.getElementById("playlistCards");
       C.playlists.forEach(function (p) {
         var card = document.createElement("a");
         card.className = "playlist-card";
         card.href = p.submit;
-        card.innerHTML =
-          '<img src="' + p.cover + '" alt="' + p.title + '" />' +
-          '<div class="playlist-card-body">' +
-          '<div class="playlist-card-label">' + p.label + '</div>' +
-          '<div class="playlist-card-title">' + p.title + '</div>' +
-          '<p>' + p.desc + '</p>' +
-          '<span class="playlist-card-link">Open playlist page →</span>' +
-          '</div>';
+        card.innerHTML = '<img src="' + p.cover + '" alt="' + p.title + '" /><div class="playlist-card-body"><div class="playlist-card-label">' + p.label + '</div><div class="playlist-card-title">' + p.title + '</div><p>' + p.desc + '</p><span class="playlist-card-link">Open playlist page →</span></div>';
         playRoot.appendChild(card);
       });
-
       document.getElementById("contactForm").addEventListener("submit", function (e) {
         e.preventDefault();
         var name = document.getElementById("name").value.trim();
@@ -135,13 +96,8 @@
         var message = document.getElementById("message").value.trim();
         var msg = document.getElementById("contactMsg");
         var body = "Name: " + name + "\nEmail: " + email + "\n\n" + message;
-        window.location.href =
-          "mailto:ignite.records2026@gmail.com?subject=" +
-          encodeURIComponent("Ignite Records contact — " + name) +
-          "&body=" + encodeURIComponent(body);
-        msg.hidden = false;
-        msg.className = "msg ok";
-        msg.textContent = "Opening your email app…";
+        window.location.href = "mailto:ignite.records2026@gmail.com?subject=" + encodeURIComponent("Ignite Records contact — " + name) + "&body=" + encodeURIComponent(body);
+        msg.hidden = false; msg.className = "msg ok"; msg.textContent = "Opening your email app…";
       });
     })();
   </script>
