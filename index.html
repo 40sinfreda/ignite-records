@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0D0D0D" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/site.css?v=20260905e" />
+  <link rel="stylesheet" href="css/site.css?v=20260905f" />
 </head>
 <body>
   <nav>
@@ -23,6 +23,9 @@
       </div>
     </div>
   </nav>
+  <section class="stories-wrap" aria-label="Playlists and albums">
+    <div class="stories" id="storiesBar"></div>
+  </section>
   <header class="hero">
     <img class="logo-img" src="brand/logo-hero.jpg" alt="Ignite Records — Independent · Original" />
     <p class="tag">Music Label</p>
@@ -55,11 +58,51 @@
     </div>
   </section>
   <footer><p>© 2026 Ignite Records. All rights reserved. · <a href="index.html">Home</a></p></footer>
-  <script src="js/catalog.js?v=20260905e"></script>
+  <script src="js/catalog.js?v=20260905f"></script>
   <script src="js/nav.js"></script>
   <script>
     (function () {
       var C = window.IGNITE;
+      var COVERS = {
+        "5KhQQ68HQwAva4oaizWKQ5": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02d209f19f51a7f5dc3911daac",
+        "1VKxMF9LDjn9fFZ6SXQ1EQ": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e023de556b222e54b896d598aa8",
+        "5cJ9rVCakOabCrVg4gzw1K": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02b0aacb4ed5ce7107ce738d4c",
+        "5xkKPkkgkDH2NACvH8pZC2": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e02c5ba3404e45642b8809cba50",
+        "4dcfl54D1IAjsdIy2jRRjd": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e027efa2c2837c69fcf5c875378",
+        "08ptJT5Vuaj1TUtzDYjZRZ": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e029ebbf6735961f20f8941d54a",
+        "0ViDyHnGKRm2wimwVPXUIG": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02a4d722ff1a1238266f172271",
+        "34bdVJvKviIR4W5m4eebYu": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02c913b7c6346f3eda70bacf28",
+        "3g2wHfIFqKJYBbocb8X1qI": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02e380ee5d67b8f0a137c75093",
+        "5elVLmHYoKcuTcJXyDooN4": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e023c789034133b86b6d2b7d514",
+        "5BOfdDEGNX6Rshq3R4AIAE": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e023bff80c2e3bfc60b20c4383d",
+        "4RikPOmKaec4BVtPx7fGhi": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e021c34d060e4a3a1c013f7e668",
+        "56p5fgf7pInYHskZa1NrZH": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0218ab151761fda1bc4e2cf015",
+        "0HL66ixZhedcySBPZDBlnh": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02ce6e81b3d8ab74381a5e5656",
+        "0bnIllADfANb792HDVaggE": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02ca1bed355f2fcf587af48386",
+        "28lGXQULPlPodxN5gZfu7h": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02412e11dbc6a3e44ee4313be2",
+        "46iMGzd54nC6ncU8FLAfDS": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02519d32f4d58e02f98bb2d4d9",
+        "7HpT8Faxu3JktiREuwE1mw": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0218afbb715088b29d70a55f5b",
+        "7kk9ZuaUVHN8X8V4aK3m5u": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02a14e3b36835f560dcbc6bc11",
+        "1YlgXuafFIqVQetPn1OKTE": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e02406f9dbb7a7ee6546af68562"
+      };
+      function addStory(parent, href, img, label, extraClass, external) {
+        var a = document.createElement("a");
+        a.className = "story" + (extraClass ? " " + extraClass : "");
+        a.href = href;
+        if (external) { a.target = "_blank"; a.rel = "noopener"; }
+        var short = label.length > 14 ? label.slice(0, 13) + "…" : label;
+        a.innerHTML = '<span class="story-ring"><img src="' + img + '" alt="' + label + '" /></span><span class="story-label">' + short + '</span>';
+        parent.appendChild(a);
+      }
+      var stories = document.getElementById("storiesBar");
+      C.playlists.forEach(function (p) {
+        addStory(stories, p.submit, p.cover, p.title, "story-pl", false);
+      });
+      C.artists.forEach(function (artist) {
+        (artist.albums || []).forEach(function (alb) {
+          addStory(stories, "https://open.spotify.com/album/" + alb.id, COVERS[alb.id] || artist.photo, alb.title, "story-alb", true);
+        });
+      });
       var grid = document.getElementById("artistsGrid");
       C.artists.forEach(function (a) {
         var el = document.createElement("a");
