@@ -113,24 +113,6 @@ window.IGNITE = {
       submit: "playlist-top100-us.html"
     },
     {
-      id: "galgalatz",
-      title: "Galgalatz Live",
-      label: "Live on air",
-      desc: "Playlist synced in real time with songs aired on Galgalatz. Approved artists are planted every 5 tracks. Independent fan project — not officially affiliated with the station.",
-      cover: "brand/glive.jpg",
-      spotifyId: "2sCgMi2KCgRfeqWIdjJNxv",
-      submit: "playlist-galgalatz.html"
-    },
-    {
-      id: "galgalatz-yt",
-      title: "גלגלצ מתעדכן LIVE",
-      label: "YouTube · Live",
-      desc: "פלייליסט דינמי ביוטיוב בהשראת שירים שמשודרים בגלגלצ. אמנים מאושרים נשתלים כל 5 שירים. פרויקט עצמאי — ללא קשר רשמי לתחנה.",
-      cover: "brand/glive.jpg",
-      youtubePlaylistId: "PLZIA7pKbjpTU",
-      submit: "playlist-galgalatz-youtube.html"
-    },
-    {
       id: "gym-hits",
       title: "IGNITE GYM HITS",
       label: "Weekly workout",
