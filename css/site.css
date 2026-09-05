@@ -130,15 +130,13 @@ section { padding: 4rem 1.25rem; }
 .btn.outline:hover { background: var(--fire); color: var(--bg); }
 iframe.spotify {
   width: 100%;
-  min-height: 380px;
-  height: 380px;
+  height: 352px;
+  min-height: 352px;
   border: 0;
   border-radius: 12px;
-  border: 1px solid var(--line);
   display: block;
   background: #121212;
 }
-.embed-wrap { overflow: visible; }
 
 .playlist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
 .playlist-cover {
@@ -257,10 +255,10 @@ footer {
   .artists-grid { gap: 0.75rem; max-width: 100%; }
   .artist-hero img { width: 220px; height: 220px; }
   .album-block { padding: 1rem; }
-  .btn { width: 100%; }
+  .btn-row .btn { flex: 1 1 calc(50% - 0.4rem); }
   iframe.spotify {
     width: 100%;
-    min-height: 420px;
-    height: 420px;
+    height: 152px;
+    min-height: 152px;
   }
 }
