@@ -9,7 +9,11 @@ window.IGNITE = {
       spotifyArtistId: "6wKZVhE7JPFgDdHonDuWiJ",
       spotifyArtistUrl: "https://open.spotify.com/artist/6wKZVhE7JPFgDdHonDuWiJ",
       ai: true,
-      bio: ["Welcome to the official channel of Sean Levine.", "Original rock catalog on Spotify and YouTube."],
+      bio: [
+        "Welcome to the official channel of Sean Levine — a musician who blends a deep love for quality rock 'n' roll with cutting-edge production. Born on July 23, 2000, Sean is a persona built around high-quality original rock.",
+        "The sound is pure and powerful: heavy riffs, melodic hooks, and a polished studio finish. Every song is original — no covers — with a focus on building a unique catalog.",
+        "Follow the journey on Spotify and YouTube as the catalog keeps growing."
+      ],
       albums: [
         { title: "BEAUTIFUL DISASTER", id: "5KhQQ68HQwAva4oaizWKQ5" },
         { title: "Happy Days", id: "1VKxMF9LDjn9fFZ6SXQ1EQ" },
@@ -25,10 +29,19 @@ window.IGNITE = {
       spotifyArtistId: "1YYhdcqL8v4RBGWUD2XwNX",
       spotifyArtistUrl: "https://open.spotify.com/artist/1YYhdcqL8v4RBGWUD2XwNX",
       ai: true,
-      bio: ["Marli West is a singer-songwriter with a modern-rock voice."],
+      bio: [
+        "Marli West is a singer-songwriter with a raw, exposed, and powerful modern-rock voice. Born January 12, 2002 in Yorkshire, England, she carries the quiet of northern England into the pace of urban life.",
+        "Her music is layered with emotion — acoustic guitar against rainy nights, lyrics of longing, rising into strings and full band power.",
+        "Stage presence is part of the brand: leather, dark hair, magnetic lights. The blend of human feeling and modern production is meant to stay with the listener."
+      ],
       albums: [
         { title: "WHAT DID YOU DO?", id: "5xkKPkkgkDH2NACvH8pZC2" },
+        { title: "Missing You Bare", id: "4dcfl54D1IAjsdIy2jRRjd" },
+        { title: "Scroungin' for the light", id: "08ptJT5Vuaj1TUtzDYjZRZ" },
         { title: "I'M ON MY WAY", id: "0ViDyHnGKRm2wimwVPXUIG" },
+        { title: "FAMILIAR STRANGERS", id: "34bdVJvKviIR4W5m4eebYu" },
+        { title: "IN MY HEAD", id: "3g2wHfIFqKJYBbocb8X1qI" },
+        { title: "Steady Ground", id: "5elVLmHYoKcuTcJXyDooN4" },
         { title: "WE ARE LIGHT", id: "5BOfdDEGNX6Rshq3R4AIAE" }
       ]
     },
@@ -42,10 +55,21 @@ window.IGNITE = {
       spotifyArtistUrl: "https://open.spotify.com/artist/1q4AeO5g6ahHV5GxbBYoEt",
       ai: true,
       gallery: ["artists/teomic-1.jpg","artists/teomic-2.jpg","artists/teomic-3.jpg"],
-      bio: ["TEOMIC FIRE is a Dutch electronic duo."],
+      bio: [
+        "TEOMIC FIRE is a Dutch electronic duo of twin brothers Lucas and Finn Van den Berg, born August 2, 2004. Their telepathic synergy becomes a futuristic soundscape.",
+        "From Binary Flame to High Energy and beyond — atmospheric synths, pulsing rhythm, and a fresh frequency in modern trance and high-energy electronic music.",
+        "Aesthetics: minimalist tech-wear, LED accents, digital fire on giant screens. From production to artwork to distribution, they stay inside every stage of the work."
+      ],
       albums: [
         { title: "HIGH ENERGY", id: "4RikPOmKaec4BVtPx7fGhi" },
-        { title: "WE ARE LIGHT", id: "5BOfdDEGNX6Rshq3R4AIAE" }
+        { title: "Binary flame", id: "56p5fgf7pInYHskZa1NrZH" },
+        { title: "WE ARE LIGHT", id: "5BOfdDEGNX6Rshq3R4AIAE" },
+        { title: "YASSOU", id: "0HL66ixZhedcySBPZDBlnh" },
+        { title: "ECHOES OF THE SOUL", id: "0bnIllADfANb792HDVaggE" },
+        { title: "MAKE NOISE", id: "28lGXQULPlPodxN5gZfu7h" },
+        { title: "IGNITE THE FREQUENCY", id: "46iMGzd54nC6ncU8FLAfDS" },
+        { title: "Bloodline", id: "7HpT8Faxu3JktiREuwE1mw" },
+        { title: "TWO SOULS", id: "7kk9ZuaUVHN8X8V4aK3m5u" }
       ]
     },
     {
@@ -59,8 +83,15 @@ window.IGNITE = {
       spotifyArtistId: "577132Wt0yU5yE7cJw2l5d",
       spotifyArtistUrl: "https://open.spotify.com/artist/577132Wt0yU5yE7cJw2l5d",
       ai: true,
-      bio: ["Nixie Row, East London vintage-modern fusion."],
-      albums: [{ title: "MY TIME", id: "1YlgXuafFIqVQetPn1OKTE" }]
+      bio: [
+        "Nixie Row was born and raised in East London, where market noise meets underground jazz. Daughter of immigrants with Motown and classic soul records, she deconstructed Amy Winehouse and Aretha Franklin on a worn piano at home.",
+        "She calls the style Vintage-Modern Fusion: dirty blues-rock, shrieking funk brass, cinematic strings, and a deep smoky voice. Sharp rap segments sit inside the soul songs — her trademark.",
+        "After years in Camden's dirty-blues clubs she turned personal pain into musical drama: small addictions, golden cages, stolen time."
+      ],
+      quote: "I don't write songs to make you smile. I write them so you feel something, even if it hurts a little. My music is the place where gold meets dirt.",
+      albums: [
+        { title: "MY TIME", id: "1YlgXuafFIqVQetPn1OKTE" }
+      ]
     }
   ],
   playlists: [
@@ -102,6 +133,7 @@ window.IGNITE = {
     }
   ]
 };
+
 window.IGNITE.getArtist = function (slug) {
   return window.IGNITE.artists.find(function (a) { return a.slug === slug; });
 };
