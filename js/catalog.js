@@ -128,7 +128,7 @@ window.IGNITE = {
       label: "Weekly rock",
       desc: "Billboard rock and alternative charts, plus approved independent tracks every 5 songs. Updated weekly.",
       cover: "https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da84f3a7a688625fdebc09f17d42",
-      spotifyId: "3s5MZEfHafUQAqFSnZIDpM",
+      spotifyId: "4wi0AtpQQq2RzoACaRx6Hf",
       submit: "playlist-rock-hits.html"
     }
   ]
