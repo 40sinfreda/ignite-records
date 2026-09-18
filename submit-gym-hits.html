@@ -45,9 +45,9 @@
     </form>
   </main>
   <footer><p>© 2026 Ignite Records · <a href="playlist-gym-hits.html">About playlist</a> · <a href="index.html">Home</a></p></footer>
+  <script src="js/submit.js?v=20260918s"></script>
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzxM29Xbjo1Bsi_f4UVfHhey_AAuCirm5U6T69Ve1Io4ib96F3A52abxGwu-fUbjYv4HA/exec";
-    const FORM_NAME = "gym-hits";
+    const PLAYLIST_ID = "gym";
     let trackId = "";
     function extractTrack(url) {
       const m = String(url || "").match(/spotify\.com\/track\/([A-Za-z0-9]+)/);
@@ -74,22 +74,32 @@
       }
       btn.disabled = true; btn.textContent = "Submitting…";
       try {
-        await fetch(SCRIPT_URL, {
-          method: "POST", mode: "no-cors",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({
-            form: FORM_NAME,
-            fullname: document.getElementById("fullname").value.trim(),
-            stagename: document.getElementById("stagename").value.trim(),
-            email: document.getElementById("email").value.trim(),
-            trackurl: document.getElementById("trackurl").value.trim(),
-            trackId: trackId,
-            marketing: document.getElementById("marketing").checked,
-            agreedReview: true, agreedListen: true
-          })
+        var data = await window.igniteSubmit({
+          id: PLAYLIST_ID,
+          fullname: document.getElementById("fullname").value.trim(),
+          stagename: document.getElementById("stagename").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          trackurl: document.getElementById("trackurl").value.trim(),
+          trackId: trackId,
+          marketing: document.getElementById("marketing").checked
         });
-        msg.hidden = true; successBox.classList.add("show"); document.getElementById("f").reset(); trackId = ""; document.getElementById("trackHint").textContent = "";
-      } catch (err) { msg.className = "msg err"; msg.textContent = "Something went wrong. Please try again."; }
+        if (data.exists) {
+          msg.className = "msg err";
+          msg.textContent = data.error || "This track is already in the playlist.";
+        } else if (!data.ok) {
+          msg.className = "msg err";
+          msg.textContent = data.error || "Something went wrong. Please try again.";
+        } else {
+          msg.hidden = true;
+          successBox.classList.add("show");
+          document.getElementById("f").reset();
+          trackId = "";
+          document.getElementById("trackHint").textContent = "";
+        }
+      } catch (err) {
+        msg.className = "msg err";
+        msg.textContent = "Something went wrong. Please try again.";
+      }
       btn.disabled = false; btn.textContent = "Submit Track";
     });
   </script>
