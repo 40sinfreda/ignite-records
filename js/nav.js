@@ -26,7 +26,7 @@
     return;
   }
   var s = document.createElement("script");
-  s.src = "js/i18n.js?v=20260918menu";
+  s.src = "js/i18n.js?v=20260918hadar";
   s.onload = boot;
   s.onerror = boot;
   document.head.appendChild(s);
