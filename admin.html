@@ -12,7 +12,6 @@
     body { max-width: 880px; margin: 0 auto; }
     .admin-head { padding: 1.5rem 1.25rem 0.5rem; }
     .admin-head h1 { font-family: 'Bebas Neue', Impact, sans-serif; letter-spacing: 0.08em; font-size: 2rem; }
-    .muted { color: var(--muted); font-size: 0.9rem; }
     .card, .track, .login-box {
       background: var(--bg2); border: 1px solid var(--line);
       border-radius: 10px; padding: 1rem 1.1rem; margin: 0.75rem 1.25rem;
@@ -35,8 +34,6 @@
       color: var(--text); padding: 0.55rem 0.7rem; border-radius: 8px; margin-top: 0.35rem;
     }
     .hidden { display: none !important; }
-    #frameWrap { margin: 0 1.25rem 2rem; min-height: 70vh; }
-    #frameWrap iframe { width: 100%; min-height: 70vh; border: 1px solid var(--line); border-radius: 10px; background: #111; }
   </style>
 </head>
 <body>
@@ -64,9 +61,6 @@
     <p id="status" class="muted" style="padding:0 1.25rem"></p>
     <div id="list"></div>
     <div id="detail" hidden></div>
-    <div id="frameWrap" class="hidden">
-      <iframe id="adminFrame" referrerpolicy="no-referrer" title="Admin panel"></iframe>
-    </div>
   </div>
   <footer>
     <p>© 2026 Ignite Records · <a href="index.html">Home</a></p>
@@ -79,7 +73,7 @@
     function jsonp(params) {
       return new Promise(function (resolve, reject) {
         var name = "igniteAdminCb" + (++cbN);
-        var t = setTimeout(function () { cleanup(); reject(new Error("timeout")); }, 25000);
+        var t = setTimeout(function () { cleanup(); reject(new Error("timeout")); }, 30000);
         function cleanup() {
           clearTimeout(t);
           delete window[name];
@@ -87,6 +81,7 @@
         }
         window[name] = function (data) { cleanup(); resolve(data); };
         var s = document.createElement("script");
+        s.referrerPolicy = "no-referrer";
         s.onerror = function () { cleanup(); reject(new Error("blocked")); };
         s.src = APP + "?" + params + "&secret=" + encodeURIComponent(PAGE_PASS) + "&callback=" + name + "&_=" + Date.now();
         document.body.appendChild(s);
@@ -96,15 +91,7 @@
       $("status").className = "muted " + (cls || "");
       $("status").textContent = text || "";
     }
-    function showEmbed() {
-      $("list").innerHTML = "";
-      $("detail").hidden = true;
-      $("frameWrap").classList.remove("hidden");
-      $("adminFrame").src = APP + "?k=" + encodeURIComponent(PAGE_PASS);
-      setStatus("Loaded inside the site.");
-    }
     function renderList(rows) {
-      $("frameWrap").classList.add("hidden");
       $("detail").hidden = true;
       var root = $("list");
       root.innerHTML = "";
@@ -142,15 +129,22 @@
         btn.onclick = function () { decide(btn.getAttribute("data-id"), btn.getAttribute("data-row"), "declined"); };
       });
     }
+    function failBox(err) {
+      $("list").innerHTML =
+        "<div class='card'><p class='err'>Google blocked the connection from this page.</p>" +
+        "<p class='muted'>Use the working panel:</p>" +
+        "<p><a class='btn' href='" + APP + "' rel='noreferrer noopener' referrerpolicy='no-referrer' target='_blank'>Open admin</a></p>" +
+        "<p class='muted'>" + err + "</p></div>";
+    }
     function loadList() {
       setStatus("Loading…");
       jsonp("action=list").then(function (data) {
         if (!data || !data.ok) throw new Error((data && data.error) || "unauthorized");
         setStatus("");
         renderList(data.playlists);
-      }).catch(function () {
-        setStatus("Opening panel inside the site…");
-        showEmbed();
+      }).catch(function (err) {
+        setStatus("");
+        failBox(err.message);
       });
     }
     function openPlaylist(id) {
@@ -159,7 +153,7 @@
         if (!data || !data.ok) throw new Error((data && data.error) || "fail");
         setStatus("");
         renderTracks(data);
-      }).catch(function () { showEmbed(); });
+      }).catch(function (err) { setStatus(""); failBox(err.message); });
     }
     function decide(id, row, status) {
       setStatus("Saving…");
@@ -168,7 +162,7 @@
           if (!data || !data.ok) throw new Error((data && data.error) || "fail");
           setStatus(status === "approved" ? "Approved" : "Declined", "ok");
           openPlaylist(id);
-        }).catch(function () { showEmbed(); });
+        }).catch(function (err) { setStatus(""); failBox(err.message); });
     }
     function showApp() {
       $("loginView").classList.add("hidden");
