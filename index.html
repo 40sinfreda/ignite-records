@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ignite Records</title>
-  <meta name="description" content="Ignite Records — independent original music. Sean Levine, Marli West, Teomic Fire, Nixie Row." />
+  <meta name="description" content="Ignite Records, independent original music. Sean Levine, Marli West, Teomic Fire, Nixie Row." />
   <meta name="theme-color" content="#0D0D0D" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -45,7 +45,7 @@
     <div class="stories" id="storiesBar"></div>
   </div>
   <header class="hero">
-    <img class="logo-img" src="brand/logo-hero.jpg" alt="Ignite Records — Independent · Original" />
+    <img class="logo-img" src="brand/logo-hero.jpg" alt="Ignite Records, Independent · Original" />
     <p class="tag" data-i18n="tag">Music Label</p>
   </header>
   <section id="artists" class="bg2">
@@ -76,9 +76,9 @@
     </div>
   </section>
   <footer><p><span data-i18n="footer">© 2026 Ignite Records. All rights reserved.</span> · <a href="index.html" data-i18n="home">Home</a></p></footer>
-  <script src="js/catalog.js?v=20260918he"></script>
-  <script src="js/i18n.js?v=20260918menu"></script>
-  <script src="js/nav.js?v=20260918menu"></script>
+  <script src="js/catalog.js?v=20260918hadar"></script>
+  <script src="js/i18n.js?v=20260918hadar"></script>
+  <script src="js/nav.js?v=20260918hadar"></script>
   <script>
     (function () {
       var C = window.IGNITE;
@@ -118,7 +118,7 @@
         addStory(stories, p.submit, p.cover, I.textOf(p, "title"), "story-pl", false);
       });
       var seen = {};
-      C.artists.forEach(function (artist) {
+      I.visibleArtists().forEach(function (artist) {
         (artist.albums || []).forEach(function (alb) {
           if (!ALBUM_IDS[alb.id] || seen[alb.id]) return;
           seen[alb.id] = 1;
@@ -126,23 +126,23 @@
         });
       });
       var grid = document.getElementById("artistsGrid");
-      C.artists.forEach(function (a) {
+      I.visibleArtists().forEach(function (a) {
         var el = document.createElement("a");
         el.className = "artist-card";
         el.href = "artist.html?slug=" + encodeURIComponent(a.slug);
-        el.innerHTML = '<img src="' + a.photo + '" alt="' + a.name + '" /><div class="artist-info"><div class="artist-name">' + a.name + '</div><div class="artist-genre">' + I.textOf(a, "genre") + '</div></div>';
+        el.innerHTML = '<img src="' + a.photo + '" alt="' + I.textOf(a, "name") + '" /><div class="artist-info"><div class="artist-name">' + I.textOf(a, "name") + '</div><div class="artist-genre">' + I.textOf(a, "genre") + '</div></div>';
         grid.appendChild(el);
       });
       var releases = document.getElementById("releasesList");
-      C.artists.forEach(function (a) {
-        var album = a.albums[0];
+      I.visibleArtists().forEach(function (a) {
+        var album = (a.albums || [])[0];
         if (!album) return;
         var row = document.createElement("div");
         row.className = "album-row";
         row.innerHTML =
-          '<div><h3>' + a.name + '<br>' + album.title + '</h3><p>' + I.t("streamLine") + '</p></div>' +
+          '<div><h3>' + I.textOf(a, "name") + '<br>' + album.title + '</h3><p>' + I.t("streamLine") + '</p></div>' +
           '<div>' +
-          '<iframe class="spotify" title="' + a.name + '" src="https://open.spotify.com/embed/album/' + album.id + '?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>' +
+          '<iframe class="spotify" title="' + I.textOf(a, "name") + '" src="https://open.spotify.com/embed/album/' + album.id + '?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>' +
           '<div class="btn-row">' +
           '<a class="btn" href="https://open.spotify.com/album/' + album.id + '" target="_blank" rel="noopener">' + I.t("listenSpotify") + '</a>' +
           (a.youtube ? '<a class="btn outline" href="' + a.youtube + '" target="_blank" rel="noopener">YouTube</a>' : '') +
@@ -165,7 +165,7 @@
         var message = document.getElementById("message").value.trim();
         var msg = document.getElementById("contactMsg");
         var body = (I.lang() === "he" ? "\u05e9\u05dd: " : "Name: ") + name + "\n" + (I.lang() === "he" ? "\u05d0\u05d9\u05de\u05d9\u05d9\u05dc: " : "Email: ") + email + "\n\n" + message;
-        window.location.href = "mailto:ignite.records2026@gmail.com?subject=" + encodeURIComponent("Ignite Records contact — " + name) + "&body=" + encodeURIComponent(body);
+        window.location.href = "mailto:ignite.records2026@gmail.com?subject=" + encodeURIComponent("Ignite Records contact - " + name) + "&body=" + encodeURIComponent(body);
         msg.hidden = false; msg.className = "msg ok"; msg.textContent = I.t("openingMail");
       });
     })();
