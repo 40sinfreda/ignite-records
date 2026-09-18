@@ -1,5 +1,5 @@
 (function () {
-  var ADMIN = "https://script.google.com/macros/s/AKfycbxOLC1RiIQFkLhRNpxu7-1GeTJdHfdJbDPhqh4EOsRZPL16Hfrz-GKejWSPoVAhgaFD4w/exec";
+  var ADMIN = "https://script.google.com/macros/s/AKfycbx4j9AMYhINghxk5U28Zf4lAkkOQygcHWwAdZ2Lk30-2kKdonkm217T7YTcsGQsdLJytA/exec";
   var btn = document.getElementById("navToggle");
   var links = document.getElementById("navLinks");
   if (btn && links) {
