@@ -21,7 +21,7 @@ window.I18N = (function () {
       send: "Send Message",
       openingMail: "Opening your email app\u2026",
       tag: "Music Label",
-      streamLine: "Stream the full catalog and latest release on Spotify. Open the artist page for every album.",
+      streamLine: "Listen to the full catalog and the latest release on Spotify. Open the artist page for every album.",
       listenSpotify: "Listen on Spotify",
       allAlbums: "All albums",
       openPage: "Open playlist page \u2192",
@@ -58,7 +58,7 @@ window.I18N = (function () {
       send: "\u05e9\u05dc\u05d9\u05d7\u05ea \u05d4\u05d5\u05d3\u05e2\u05d4",
       openingMail: "\u05e4\u05d5\u05ea\u05d7 \u05d0\u05ea \u05d0\u05e4\u05dc\u05d9\u05e7\u05e6\u05d9\u05d9\u05ea \u05d4\u05d3\u05d5\u05d0\u05e8\u2026",
       tag: "\u05dc\u05d9\u05d9\u05d1\u05dc \u05de\u05d5\u05d6\u05d9\u05e7\u05d4",
-      streamLine: "\u05de\u05e7\u05e9\u05d9\u05d1\u05d9\u05dd \u05d0\u05ea \u05d4\u05e7\u05d8\u05dc\u05d5\u05d2 \u05d4\u05de\u05dc\u05d0 \u05d5\u05d0\u05ea \u05d4\u05d4\u05d5\u05e6\u05d0\u05d4 \u05d4\u05d7\u05d3\u05e9\u05d4 \u05d1\u05e1\u05e4\u05d5\u05d8\u05d9\u05e4\u05d9\u05d9. \u05d1\u05d3\u05e3 \u05d4\u05d0\u05de\u05df \u05ea\u05de\u05e6\u05d0\u05d5 \u05db\u05dc \u05d4\u05d0\u05dc\u05d1\u05d5\u05de\u05d9\u05dd.",
+      streamLine: "\u05de\u05e7\u05e9\u05d9\u05d1\u05d9\u05dd \u05dc\u05e7\u05d8\u05dc\u05d5\u05d2 \u05d4\u05de\u05dc\u05d0 \u05d5\u05dc\u05d4\u05d5\u05e6\u05d0\u05d4 \u05d4\u05d7\u05d3\u05e9\u05d4 \u05d1\u05e1\u05e4\u05d5\u05d8\u05d9\u05e4\u05d9\u05d9. \u05d1\u05d3\u05e3 \u05d4\u05d0\u05de\u05df \u05ea\u05de\u05e6\u05d0\u05d5 \u05db\u05dc \u05d4\u05d0\u05dc\u05d1\u05d5\u05de\u05d9\u05dd.",
       listenSpotify: "\u05d4\u05d0\u05d6\u05e0\u05d4 \u05d1\u05e1\u05e4\u05d5\u05d8\u05d9\u05e4\u05d9\u05d9",
       allAlbums: "\u05db\u05dc \u05d4\u05d0\u05dc\u05d1\u05d5\u05de\u05d9\u05dd",
       openPage: "\u05dc\u05e2\u05de\u05d5\u05d3 \u05d4\u05e4\u05dc\u05d9\u05d9\u05dc\u05d9\u05e1\u05d8 \u2190",
@@ -112,10 +112,17 @@ window.I18N = (function () {
     }
   }
 
-  function visiblePlaylists() {
-    var list = (window.IGNITE && window.IGNITE.playlists) || [];
+  function visibleList(list) {
     var he = lang() === "he";
-    return list.filter(function (p) { return he || !p.heOnly; });
+    return (list || []).filter(function (item) { return he || !item.heOnly; });
+  }
+
+  function visiblePlaylists() {
+    return visibleList((window.IGNITE && window.IGNITE.playlists) || []);
+  }
+
+  function visibleArtists() {
+    return visibleList((window.IGNITE && window.IGNITE.artists) || []);
   }
 
   function textOf(item, field) {
@@ -199,6 +206,7 @@ window.I18N = (function () {
     setLang: setLang,
     applyDoc: applyDoc,
     visiblePlaylists: visiblePlaylists,
+    visibleArtists: visibleArtists,
     textOf: textOf,
     mountButton: mountButton
   };
