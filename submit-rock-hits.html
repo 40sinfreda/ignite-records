@@ -25,7 +25,7 @@
     <img src="https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da84f3a7a688625fdebc09f17d42" alt="IGNITE ROCK HITS" style="width:100%;max-width:420px;border-radius:8px;margin:0 auto 1.5rem;display:block" />
     <h1 class="section-title" style="text-align:left;margin-bottom:0.5rem">Submit Your Track</h1>
     <p style="color:var(--muted);margin-bottom:1.5rem">Apply to feature in IGNITE ROCK HITS. Each week we scan leading rock and alternative charts. Spotify track link only. Approved songs are planted every 5 tracks after manual review.</p>
-    <p style="margin-bottom:1.5rem"><a class="btn outline" href="https://open.spotify.com/playlist/3s5MZEfHafUQAqFSnZIDpM" target="_blank" rel="noopener">Open playlist on Spotify</a></p>
+    <p style="margin-bottom:1.5rem"><a class="btn outline" href="https://open.spotify.com/playlist/4wi0AtpQQq2RzoACaRx6Hf" target="_blank" rel="noopener">Open playlist on Spotify</a></p>
     <form id="f">
       <div class="form-group"><label>Full Name *</label><input id="fullname" required /></div>
       <div class="form-group"><label>Artist / Stage Name *</label><input id="stagename" required /></div>
@@ -36,7 +36,7 @@
         <p id="trackHint" style="font-size:0.8rem;color:var(--muted);margin-top:0.4rem"></p>
       </div>
       <label class="check"><input type="checkbox" id="review" required /> I understand my track goes through manual review and may be approved or declined — inclusion is not guaranteed.</label>
-      <label class="check"><input type="checkbox" id="listen" required /> I agree to save the playlist and listen to several tracks from it at least once a month.</label>
+      <label class="check"><input type="checkbox" id="listen" required /> I agree to save the playlist and listen to several tracks from this playlist at least once a month.</label>
       <label class="check"><input type="checkbox" id="marketing" /> Send me updates from Ignite Records.</label>
       <p class="star-note"><strong>*</strong> This is a private, experimental project. By clicking Submit you acknowledge that the playlist operator assumes no liability for placement, promotion, streams, revenue, or any outcome related to your submission.</p>
       <button type="submit" class="btn" id="btn" style="width:100%;margin-top:1.25rem">Submit Track</button>
@@ -45,9 +45,9 @@
     </form>
   </main>
   <footer><p>© 2026 Ignite Records · <a href="playlist-rock-hits.html">About playlist</a> · <a href="index.html">Home</a></p></footer>
+  <script src="js/submit.js?v=20260918s"></script>
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlvJnt4sg71ttDHweduFGHacjLUVESV7A-tpcPaRsHlOARl7k7aE3iOeoM_JwZn22m4Q/exec";
-    const FORM_NAME = "rock-hits";
+    const PLAYLIST_ID = "rock";
     let trackId = "";
     function extractTrack(url) {
       const m = String(url || "").match(/spotify\.com\/track\/([A-Za-z0-9]+)/);
@@ -74,22 +74,32 @@
       }
       btn.disabled = true; btn.textContent = "Submitting…";
       try {
-        await fetch(SCRIPT_URL, {
-          method: "POST", mode: "no-cors",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({
-            form: FORM_NAME,
-            fullname: document.getElementById("fullname").value.trim(),
-            stagename: document.getElementById("stagename").value.trim(),
-            email: document.getElementById("email").value.trim(),
-            trackurl: document.getElementById("trackurl").value.trim(),
-            trackId: trackId,
-            marketing: document.getElementById("marketing").checked,
-            agreedReview: true, agreedListen: true
-          })
+        var data = await window.igniteSubmit({
+          id: PLAYLIST_ID,
+          fullname: document.getElementById("fullname").value.trim(),
+          stagename: document.getElementById("stagename").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          trackurl: document.getElementById("trackurl").value.trim(),
+          trackId: trackId,
+          marketing: document.getElementById("marketing").checked
         });
-        msg.hidden = true; successBox.classList.add("show"); document.getElementById("f").reset(); trackId = ""; document.getElementById("trackHint").textContent = "";
-      } catch (err) { msg.className = "msg err"; msg.textContent = "Something went wrong. Please try again."; }
+        if (data.exists) {
+          msg.className = "msg err";
+          msg.textContent = data.error || "This track is already in the playlist.";
+        } else if (!data.ok) {
+          msg.className = "msg err";
+          msg.textContent = data.error || "Something went wrong. Please try again.";
+        } else {
+          msg.hidden = true;
+          successBox.classList.add("show");
+          document.getElementById("f").reset();
+          trackId = "";
+          document.getElementById("trackHint").textContent = "";
+        }
+      } catch (err) {
+        msg.className = "msg err";
+        msg.textContent = "Something went wrong. Please try again.";
+      }
       btn.disabled = false; btn.textContent = "Submit Track";
     });
   </script>
