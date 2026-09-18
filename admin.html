@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="no-referrer" />
   <title>Admin — Ignite Records</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -11,6 +12,7 @@
     .login-box { max-width: 420px; margin: 3rem auto; background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; padding: 1.2rem; }
     input[type="password"] { width: 100%; background: var(--bg); border: 1px solid var(--line); color: var(--text); padding: 0.55rem 0.7rem; border-radius: 8px; margin-top: 0.35rem; }
     .err { color: #f88; }
+    .ok { color: #8f8; }
   </style>
 </head>
 <body>
@@ -20,7 +22,7 @@
       <a href="index.html" style="font-size:0.85rem">Back to site</a>
     </div>
   </nav>
-  <div class="login-box">
+  <div class="login-box" id="box">
     <h1 class="section-title" style="margin-bottom:0.4rem">Admin</h1>
     <p class="muted" style="margin-bottom:1rem">Enter password to continue.</p>
     <label for="loginPass">Password</label>
@@ -40,7 +42,10 @@
         document.getElementById("loginErr").textContent = "Wrong password";
         return;
       }
-      window.location.href = APP;
+      document.getElementById("box").innerHTML =
+        "<h1 class='section-title'>Admin</h1>" +
+        "<p class='muted' style='margin:0.8rem 0'>Password accepted. Open the panel in a new tab:</p>" +
+        "<a class='btn' style='display:block;text-align:center' href='" + APP + "' rel='noreferrer noopener' referrerpolicy='no-referrer' target='_blank'>Open admin panel</a>";
     }
     document.getElementById("loginBtn").onclick = go;
     document.getElementById("loginPass").addEventListener("keydown", function (e) {
