@@ -62,10 +62,10 @@
       <h1>Admin</h1>
       <p class="muted">Pending tracks by playlist</p>
     </div>
-    <div class="setup" id="setup">
+    <div class="setup hidden" id="setup">
       <p class="muted" style="margin-bottom:0.7rem">Paste the Admin Web App URL once.</p>
       <label>Script URL</label>
-      <input id="scriptUrl" type="url" placeholder="https://script.google.com/macros/s/…/exec" />
+      <input id="scriptUrl" type="url" />
       <button class="btn" style="margin-top:0.8rem" id="saveSetup">Save</button>
     </div>
     <p id="status" class="muted" style="padding:0 1.25rem"></p>
@@ -79,11 +79,12 @@
 
   <script>
     var PAGE_PASS = "181095";
+    var FIXED_URL = "https://script.google.com/macros/s/AKfycbxOLC1RiIQFkLhRNpxu7-1GeTJdHfdJbDPhqh4EOsRZPL16Hfrz-GKejWSPoVAhgaFD4w/exec";
     var STORAGE_URL = "ignite_admin_url";
     var STORAGE_OK = "ignite_admin_ok";
     var cbN = 0;
     function $(id) { return document.getElementById(id); }
-    function scriptUrl() { return localStorage.getItem(STORAGE_URL) || ""; }
+    function scriptUrl() { return FIXED_URL || localStorage.getItem(STORAGE_URL) || ""; }
     function jsonp(params) {
       return new Promise(function (resolve, reject) {
         var name = "igniteAdminCb" + (++cbN);
