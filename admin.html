@@ -45,7 +45,6 @@
       <a href="index.html" style="font-size:0.85rem">Back to site</a>
     </div>
   </nav>
-
   <div id="loginView">
     <div class="login-box">
       <h1 class="section-title" style="margin-bottom:0.4rem">Admin</h1>
@@ -56,35 +55,26 @@
       <p class="muted err" id="loginErr" hidden></p>
     </div>
   </div>
-
   <div id="appView" class="hidden">
     <div class="admin-head">
       <h1>Admin</h1>
       <p class="muted">Pending tracks by playlist</p>
     </div>
-    <div class="setup hidden" id="setup">
-      <p class="muted" style="margin-bottom:0.7rem">Paste the Admin Web App URL once.</p>
-      <label>Script URL</label>
-      <input id="scriptUrl" type="url" />
-      <button class="btn" style="margin-top:0.8rem" id="saveSetup">Save</button>
-    </div>
+    <div class="setup hidden" id="setup"></div>
     <p id="status" class="muted" style="padding:0 1.25rem"></p>
     <div id="list"></div>
     <div id="detail" hidden></div>
   </div>
-
   <footer>
     <p>© 2026 Ignite Records · <a href="index.html">Home</a> · <a class="admin-link" href="admin.html">admin</a></p>
   </footer>
-
   <script>
     var PAGE_PASS = "181095";
     var FIXED_URL = "https://script.google.com/macros/s/AKfycbxOLC1RiIQFkLhRNpxu7-1GeTJdHfdJbDPhqh4EOsRZPL16Hfrz-GKejWSPoVAhgaFD4w/exec";
-    var STORAGE_URL = "ignite_admin_url";
     var STORAGE_OK = "ignite_admin_ok";
     var cbN = 0;
     function $(id) { return document.getElementById(id); }
-    function scriptUrl() { return FIXED_URL || localStorage.getItem(STORAGE_URL) || ""; }
+    function scriptUrl() { return FIXED_URL; }
     function jsonp(params) {
       return new Promise(function (resolve, reject) {
         var name = "igniteAdminCb" + (++cbN);
@@ -95,7 +85,7 @@
           if (s && s.parentNode) s.parentNode.removeChild(s);
         }
         window[name] = function (data) { cleanup(); resolve(data); };
-        var url = scriptUrl() + (scriptUrl().indexOf("?") >= 0 ? "&" : "?") + params +
+        var url = scriptUrl() + "?" + params +
           "&secret=" + encodeURIComponent(PAGE_PASS) +
           "&callback=" + name + "&_=" + Date.now();
         var s = document.createElement("script");
@@ -127,12 +117,6 @@
     $("loginPass").addEventListener("keydown", function (e) {
       if (e.key === "Enter") tryLogin();
     });
-    $("saveSetup").onclick = function () {
-      var u = $("scriptUrl").value.trim();
-      if (!u) { setStatus("Missing script URL", "err"); return; }
-      localStorage.setItem(STORAGE_URL, u);
-      loadList();
-    };
     function renderList(rows) {
       $("detail").hidden = true;
       var root = $("list");
@@ -174,20 +158,13 @@
       });
     }
     function loadList() {
-      if (!scriptUrl()) {
-        $("setup").classList.remove("hidden");
-        return;
-      }
-      $("setup").classList.add("hidden");
-      $("scriptUrl").value = scriptUrl();
       setStatus("Loading…");
       jsonp("action=list").then(function (data) {
         if (!data || !data.ok) throw new Error((data && data.error) || "unauthorized");
         setStatus("");
         renderList(data.playlists);
       }).catch(function (err) {
-        $("setup").classList.remove("hidden");
-        setStatus("Cannot connect: " + err.message, "err");
+        setStatus("Cannot connect: " + err.message + ". Refresh with Ctrl+Shift+R.", "err");
       });
     }
     function openPlaylist(id) {
