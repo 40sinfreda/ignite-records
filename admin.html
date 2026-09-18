@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>אדמין — Ignite Records</title>
+  <title>Admin — Ignite Records</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/site.css" />
@@ -12,14 +12,12 @@
     .admin-head { padding: 1.5rem 1.25rem 0.5rem; }
     .admin-head h1 { font-family: 'Bebas Neue', Impact, sans-serif; letter-spacing: 0.08em; font-size: 2rem; }
     .muted { color: var(--muted); font-size: 0.9rem; }
-    .setup, .card, .track {
+    .setup, .card, .track, .login-box {
       background: var(--bg2); border: 1px solid var(--line);
       border-radius: 10px; padding: 1rem 1.1rem; margin: 0.75rem 1.25rem;
     }
-    .plist {
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 1rem; cursor: pointer; text-align: right;
-    }
+    .login-box { max-width: 420px; margin: 3rem auto; }
+    .plist { display: flex; justify-content: space-between; align-items: center; gap: 1rem; cursor: pointer; }
     .plist:hover { border-color: var(--fire); }
     .count {
       min-width: 2.2rem; height: 2.2rem; border-radius: 999px;
@@ -28,73 +26,76 @@
     }
     .count.zero { background: #333; color: var(--muted); }
     .track { display: grid; gap: 0.6rem; }
-    .track-top { display: flex; justify-content: space-between; gap: 0.75rem; align-items: flex-start; }
     .actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .btn.small { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
     .ok { color: #8f8; }
     .err { color: #f88; }
-    input[type="password"], input[type="url"] {
+    input[type="password"], input[type="url"], input[type="text"] {
       width: 100%; background: var(--bg); border: 1px solid var(--line);
-      color: var(--text); padding: 0.55rem 0.7rem; border-radius: 8px;
+      color: var(--text); padding: 0.55rem 0.7rem; border-radius: 8px; margin-top: 0.35rem;
     }
     footer a.admin-link { opacity: 0.35; font-size: 0.75rem; }
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
   <nav>
     <div class="inner">
       <a href="index.html" class="logo" aria-label="Ignite Records home"><img class="logo-nav-img" src="brand/logo-nav.jpg" alt="Ignite Records" /></a>
-      <a href="index.html" style="font-size:0.85rem">חזרה לאתר</a>
+      <a href="index.html" style="font-size:0.85rem">Back to site</a>
     </div>
   </nav>
 
-  <div class="admin-head">
-    <h1>אדמין</h1>
-    <p class="muted">שירים ממתינים לאישור בכל הפלייליסטים</p>
+  <div id="loginView">
+    <div class="login-box">
+      <h1 class="section-title" style="margin-bottom:0.4rem">Admin</h1>
+      <p class="muted" style="margin-bottom:1rem">Enter password to continue.</p>
+      <label for="loginPass">Password</label>
+      <input id="loginPass" type="password" autocomplete="current-password" />
+      <button class="btn" style="width:100%;margin-top:1rem" id="loginBtn">Sign in</button>
+      <p class="muted err" id="loginErr" hidden></p>
+    </div>
   </div>
 
-  <div class="setup" id="setup">
-    <p class="muted" style="margin-bottom:0.7rem">פעם ראשונה: הדבק את כתובת ה־Web App של סקריפט האדמין וסיסמה.</p>
-    <div class="form-group"><label>כתובת הסקריפט</label><input id="scriptUrl" type="url" placeholder="https://script.google.com/macros/s/…/exec" /></div>
-    <div class="form-group" style="margin-top:0.6rem"><label>סיסמה</label><input id="secret" type="password" /></div>
-    <button class="btn" style="margin-top:0.8rem" id="saveSetup">שמירה</button>
+  <div id="appView" class="hidden">
+    <div class="admin-head">
+      <h1>Admin</h1>
+      <p class="muted">Pending tracks by playlist</p>
+    </div>
+    <div class="setup" id="setup">
+      <p class="muted" style="margin-bottom:0.7rem">Paste the Admin Web App URL once.</p>
+      <label>Script URL</label>
+      <input id="scriptUrl" type="url" placeholder="https://script.google.com/macros/s/…/exec" />
+      <button class="btn" style="margin-top:0.8rem" id="saveSetup">Save</button>
+    </div>
+    <p id="status" class="muted" style="padding:0 1.25rem"></p>
+    <div id="list"></div>
+    <div id="detail" hidden></div>
   </div>
-
-  <p id="status" class="muted" style="padding:0 1.25rem"></p>
-  <div id="list"></div>
-  <div id="detail" hidden></div>
 
   <footer>
-    <p>© 2026 Ignite Records · <a href="index.html">Home</a> · <a class="admin-link" href="admin.html">אדמין</a></p>
+    <p>© 2026 Ignite Records · <a href="index.html">Home</a> · <a class="admin-link" href="admin.html">admin</a></p>
   </footer>
 
   <script>
+    var PAGE_PASS = "181095";
     var STORAGE_URL = "ignite_admin_url";
-    var STORAGE_SECRET = "ignite_admin_secret";
+    var STORAGE_OK = "ignite_admin_ok";
     var cbN = 0;
-
     function $(id) { return document.getElementById(id); }
     function scriptUrl() { return localStorage.getItem(STORAGE_URL) || ""; }
-    function secret() { return sessionStorage.getItem(STORAGE_SECRET) || localStorage.getItem(STORAGE_SECRET) || ""; }
-
     function jsonp(params) {
       return new Promise(function (resolve, reject) {
         var name = "igniteAdminCb" + (++cbN);
-        var t = setTimeout(function () {
-          cleanup();
-          reject(new Error("timeout"));
-        }, 20000);
+        var t = setTimeout(function () { cleanup(); reject(new Error("timeout")); }, 20000);
         function cleanup() {
           clearTimeout(t);
           delete window[name];
           if (s && s.parentNode) s.parentNode.removeChild(s);
         }
-        window[name] = function (data) {
-          cleanup();
-          resolve(data);
-        };
+        window[name] = function (data) { cleanup(); resolve(data); };
         var url = scriptUrl() + (scriptUrl().indexOf("?") >= 0 ? "&" : "?") + params +
-          "&secret=" + encodeURIComponent(secret()) +
+          "&secret=" + encodeURIComponent(PAGE_PASS) +
           "&callback=" + name + "&_=" + Date.now();
         var s = document.createElement("script");
         s.onerror = function () { cleanup(); reject(new Error("load failed")); };
@@ -102,22 +103,35 @@
         document.body.appendChild(s);
       });
     }
-
     function setStatus(text, cls) {
       $("status").className = "muted " + (cls || "");
       $("status").textContent = text || "";
     }
-
+    function showApp() {
+      $("loginView").classList.add("hidden");
+      $("appView").classList.remove("hidden");
+      sessionStorage.setItem(STORAGE_OK, "1");
+      loadList();
+    }
+    function tryLogin() {
+      var pass = $("loginPass").value.trim();
+      if (pass !== PAGE_PASS) {
+        $("loginErr").hidden = false;
+        $("loginErr").textContent = "Wrong password";
+        return;
+      }
+      showApp();
+    }
+    $("loginBtn").onclick = tryLogin;
+    $("loginPass").addEventListener("keydown", function (e) {
+      if (e.key === "Enter") tryLogin();
+    });
     $("saveSetup").onclick = function () {
       var u = $("scriptUrl").value.trim();
-      var s = $("secret").value.trim();
-      if (!u || !s) { setStatus("חסרים שדות", "err"); return; }
+      if (!u) { setStatus("Missing script URL", "err"); return; }
       localStorage.setItem(STORAGE_URL, u);
-      localStorage.setItem(STORAGE_SECRET, s);
-      sessionStorage.setItem(STORAGE_SECRET, s);
       loadList();
     };
-
     function renderList(rows) {
       $("detail").hidden = true;
       var root = $("list");
@@ -131,26 +145,24 @@
         root.appendChild(el);
       });
     }
-
     function renderTracks(pack) {
       $("list").innerHTML = "";
       var box = $("detail");
       box.hidden = false;
-      var html = "<div class='setup'><button class='btn outline small' id='backBtn'>← כל הפלייליסטים</button></div>";
-      html += "<div class='admin-head'><h1>" + pack.title + "</h1><p class='muted'>" + (pack.tracks || []).length + " ממתינים</p></div>";
+      var html = "<div class='setup'><button class='btn outline small' id='backBtn'>All playlists</button></div>";
+      html += "<div class='admin-head'><h1>" + pack.title + "</h1><p class='muted'>" + (pack.tracks || []).length + " pending</p></div>";
       (pack.tracks || []).forEach(function (t) {
         var listen = t.listen || (t.trackId ? "https://open.spotify.com/track/" + t.trackId : "");
-        html += "<div class='track' data-row='" + t.row + "'>" +
-          "<div class='track-top'><div><strong>" + (t.stage || t.name || "ללא שם") + "</strong>" +
+        html += "<div class='track'><div><strong>" + (t.stage || t.name || "Untitled") + "</strong>" +
           "<div class='muted'>" + (t.email || "") + "</div>" +
-          "<div class='muted'>" + (t.trackId || t.url || "") + "</div></div></div>" +
+          "<div class='muted'>" + (t.trackId || t.url || "") + "</div></div>" +
           "<div class='actions'>" +
-          (listen ? "<a class='btn outline small' target='_blank' rel='noopener' href='" + listen + "'>האזן</a>" : "") +
-          "<button class='btn small approve' data-id='" + pack.id + "' data-row='" + t.row + "'>אשר ✓</button>" +
-          "<button class='btn outline small decline' data-id='" + pack.id + "' data-row='" + t.row + "'>דחה</button>" +
+          (listen ? "<a class='btn outline small' target='_blank' rel='noopener' href='" + listen + "'>Listen</a>" : "") +
+          "<button class='btn small approve' data-id='" + pack.id + "' data-row='" + t.row + "'>Approve</button>" +
+          "<button class='btn outline small decline' data-id='" + pack.id + "' data-row='" + t.row + "'>Decline</button>" +
           "</div></div>";
       });
-      if (!(pack.tracks || []).length) html += "<p class='muted' style='padding:1rem 1.25rem'>אין שירים ממתינים</p>";
+      if (!(pack.tracks || []).length) html += "<p class='muted' style='padding:1rem 1.25rem'>No pending tracks</p>";
       box.innerHTML = html;
       $("backBtn").onclick = loadList;
       box.querySelectorAll(".approve").forEach(function (btn) {
@@ -160,49 +172,42 @@
         btn.onclick = function () { decide(btn.getAttribute("data-id"), btn.getAttribute("data-row"), "declined"); };
       });
     }
-
     function loadList() {
-      if (!scriptUrl() || !secret()) {
-        $("setup").style.display = "block";
+      if (!scriptUrl()) {
+        $("setup").classList.remove("hidden");
         return;
       }
-      $("setup").style.display = "none";
+      $("setup").classList.add("hidden");
       $("scriptUrl").value = scriptUrl();
-      setStatus("טוען…");
+      setStatus("Loading…");
       jsonp("action=list").then(function (data) {
         if (!data || !data.ok) throw new Error((data && data.error) || "unauthorized");
         setStatus("");
         renderList(data.playlists);
       }).catch(function (err) {
-        $("setup").style.display = "block";
-        setStatus("לא מצליח להתחבר: " + err.message, "err");
+        $("setup").classList.remove("hidden");
+        setStatus("Cannot connect: " + err.message, "err");
       });
     }
-
     function openPlaylist(id) {
-      setStatus("טוען שירים…");
+      setStatus("Loading tracks…");
       jsonp("action=pending&id=" + encodeURIComponent(id)).then(function (data) {
         if (!data || !data.ok) throw new Error((data && data.error) || "fail");
         setStatus("");
         renderTracks(data);
-      }).catch(function (err) {
-        setStatus(err.message, "err");
-      });
+      }).catch(function (err) { setStatus(err.message, "err"); });
     }
-
     function decide(id, row, status) {
-      setStatus("שומר…");
+      setStatus("Saving…");
       jsonp("action=set&id=" + encodeURIComponent(id) + "&row=" + encodeURIComponent(row) + "&status=" + encodeURIComponent(status))
         .then(function (data) {
           if (!data || !data.ok) throw new Error((data && data.error) || "fail");
-          setStatus(status === "approved" ? "אושר" : "נדחה", "ok");
+          setStatus(status === "approved" ? "Approved" : "Declined", "ok");
           openPlaylist(id);
-        }).catch(function (err) {
-          setStatus(err.message, "err");
-        });
+        }).catch(function (err) { setStatus(err.message, "err"); });
     }
-
-    loadList();
+    if (sessionStorage.getItem(STORAGE_OK) === "1") showApp();
+    $("loginPass").focus();
   </script>
 </body>
 </html>
