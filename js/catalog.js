@@ -21,9 +21,9 @@ window.IGNITE = {
         "\u05e2\u05d5\u05e7\u05d1\u05d9\u05dd \u05d0\u05d7\u05e8\u05d9 \u05d4\u05de\u05e1\u05e2 \u05d1\u05e1\u05e4\u05d5\u05d8\u05d9\u05e4\u05d9\u05d9 \u05d5\u05d1\u05d9\u05d5\u05d8\u05d9\u05d5\u05d1 \u05db\u05e9\u05d4\u05e7\u05d8\u05dc\u05d5\u05d2 \u05de\u05de\u05e9\u05d9\u05da \u05dc\u05d2\u05d3\u05dc."
       ],
       albums: [
-        { title: "BEAUTIFUL DISASTER", id: "5KhQQ68HQwAva4oaizWKQ5" },
-        { title: "Happy Days", id: "1VKxMF9LDjn9fFZ6SXQ1EQ" },
-        { title: "CAN YOU HEAR ME?", id: "5cJ9rVCakOabCrVg4gzw1K" }
+        { title: "BEAUTIFUL DISASTER", id: "5KhQQ68HQwAva4oaizWKQ5", tracks: 10 },
+        { title: "Happy Days", id: "1VKxMF9LDjn9fFZ6SXQ1EQ", tracks: 10 },
+        { title: "CAN YOU HEAR ME?", id: "5cJ9rVCakOabCrVg4gzw1K", tracks: 11 }
       ]
     },
     {
@@ -47,14 +47,14 @@ window.IGNITE = {
         "\u05d4\u05e0\u05d5\u05db\u05d7\u05d5\u05ea \u05e2\u05dc \u05d4\u05d1\u05de\u05d4 \u05d4\u05d9\u05d0 \u05d7\u05dc\u05e7 \u05de\u05d4\u05de\u05d5\u05ea\u05d2: \u05e2\u05d5\u05e8, \u05e9\u05d9\u05e2\u05e8 \u05db\u05d4\u05d4, \u05d0\u05d5\u05e8\u05d5\u05ea \u05de\u05e9\u05d9\u05db\u05d9\u05dd. \u05d4\u05e9\u05d9\u05dc\u05d5\u05d1 \u05d1\u05d9\u05df \u05e8\u05d2\u05e9 \u05d0\u05e0\u05d5\u05e9\u05d9 \u05dc\u05d4\u05e4\u05e7\u05d4 \u05de\u05d5\u05d3\u05e8\u05e0\u05d9\u05ea \u05e0\u05d5\u05e2\u05d3 \u05dc\u05d4\u05d9\u05e9\u05d0\u05e8 \u05d0\u05e6\u05dc \u05d4\u05de\u05d0\u05d6\u05d9\u05df."
       ],
       albums: [
-        { title: "WHAT DID YOU DO?", id: "5xkKPkkgkDH2NACvH8pZC2" },
-        { title: "Missing You Bare", id: "4dcfl54D1IAjsdIy2jRRjd" },
-        { title: "Scroungin' for the light", id: "08ptJT5Vuaj1TUtzDYjZRZ" },
-        { title: "I'M ON MY WAY", id: "0ViDyHnGKRm2wimwVPXUIG" },
-        { title: "FAMILIAR STRANGERS", id: "34bdVJvKviIR4W5m4eebYu" },
-        { title: "IN MY HEAD", id: "3g2wHfIFqKJYBbocb8X1qI" },
-        { title: "Steady Ground", id: "5elVLmHYoKcuTcJXyDooN4" },
-        { title: "WE ARE LIGHT", id: "5BOfdDEGNX6Rshq3R4AIAE" }
+        { title: "WHAT DID YOU DO?", id: "5xkKPkkgkDH2NACvH8pZC2", tracks: 10 },
+        { title: "Missing You Bare", id: "4dcfl54D1IAjsdIy2jRRjd", tracks: 1 },
+        { title: "Scroungin' for the light", id: "08ptJT5Vuaj1TUtzDYjZRZ", tracks: 1 },
+        { title: "I'M ON MY WAY", id: "0ViDyHnGKRm2wimwVPXUIG", tracks: 10 },
+        { title: "FAMILIAR STRANGERS", id: "34bdVJvKviIR4W5m4eebYu", tracks: 1 },
+        { title: "IN MY HEAD", id: "3g2wHfIFqKJYBbocb8X1qI", tracks: 2 },
+        { title: "Steady Ground", id: "5elVLmHYoKcuTcJXyDooN4", tracks: 1 },
+        { title: "WE ARE LIGHT", id: "5BOfdDEGNX6Rshq3R4AIAE", tracks: 10 }
       ]
     },
     {
@@ -79,16 +79,16 @@ window.IGNITE = {
         "\u05d4\u05d0\u05e1\u05ea\u05d8\u05d9\u05e7\u05d4: \u05dc\u05d1\u05d5\u05e9 \u05d8\u05db\u05e0\u05d5\u05dc\u05d5\u05d2\u05d9 \u05de\u05d9\u05e0\u05d9\u05de\u05dc\u05d9\u05e1\u05d8\u05d9, \u05ea\u05d0\u05d5\u05e8\u05ea LED \u05d5\u05d0\u05e9 \u05d3\u05d9\u05d2\u05d8\u05dc\u05d9\u05ea \u05e2\u05dc \u05de\u05e1\u05db\u05d9\u05dd. \u05d4\u05dd \u05e0\u05de\u05e6\u05d0\u05d9\u05dd \u05d1\u05db\u05dc \u05e9\u05dc\u05d1, \u05de\u05d4\u05e4\u05e7\u05d4 \u05e2\u05d3 \u05d4\u05d4\u05e4\u05e6\u05d4."
       ],
       albums: [
-        { title: "NO WITNESSES", id: "7ab3TznxMITknzwGGI2rGA" },
-        { title: "HIGH ENERGY", id: "4RikPOmKaec4BVtPx7fGhi" },
-        { title: "Binary flame", id: "56p5fgf7pInYHskZa1NrZH" },
-        { title: "WE ARE LIGHT", id: "5BOfdDEGNX6Rshq3R4AIAE" },
-        { title: "YASSOU", id: "0HL66ixZhedcySBPZDBlnh" },
-        { title: "ECHOES OF THE SOUL", id: "0bnIllADfANb792HDVaggE" },
-        { title: "MAKE NOISE", id: "28lGXQULPlPodxN5gZfu7h" },
-        { title: "IGNITE THE FREQUENCY", id: "46iMGzd54nC6ncU8FLAfDS" },
-        { title: "Bloodline", id: "7HpT8Faxu3JktiREuwE1mw" },
-        { title: "TWO SOULS", id: "7kk9ZuaUVHN8X8V4aK3m5u" }
+        { title: "NO WITNESSES", id: "7ab3TznxMITknzwGGI2rGA", tracks: 10 },
+        { title: "HIGH ENERGY", id: "4RikPOmKaec4BVtPx7fGhi", tracks: 10 },
+        { title: "Binary flame", id: "56p5fgf7pInYHskZa1NrZH", tracks: 1 },
+        { title: "WE ARE LIGHT", id: "5BOfdDEGNX6Rshq3R4AIAE", tracks: 10 },
+        { title: "YASSOU", id: "0HL66ixZhedcySBPZDBlnh", tracks: 1 },
+        { title: "ECHOES OF THE SOUL", id: "0bnIllADfANb792HDVaggE", tracks: 1 },
+        { title: "MAKE NOISE", id: "28lGXQULPlPodxN5gZfu7h", tracks: 1 },
+        { title: "IGNITE THE FREQUENCY", id: "46iMGzd54nC6ncU8FLAfDS", tracks: 1 },
+        { title: "Bloodline", id: "7HpT8Faxu3JktiREuwE1mw", tracks: 1 },
+        { title: "TWO SOULS", id: "7kk9ZuaUVHN8X8V4aK3m5u", tracks: 1 }
       ]
     },
     {
@@ -116,7 +116,7 @@ window.IGNITE = {
       quote: "I don't write songs to make you smile. I write them so you feel something, even if it hurts a little. My music is the place where gold meets dirt.",
       quoteHe: "\u05d0\u05e0\u05d9 \u05dc\u05d0 \u05db\u05d5\u05ea\u05d1\u05ea \u05e9\u05d9\u05e8\u05d9\u05dd \u05db\u05d3\u05d9 \u05e9\u05ea\u05d7\u05d9\u05d9\u05db\u05d5. \u05d0\u05e0\u05d9 \u05db\u05d5\u05ea\u05d1\u05ea \u05d0\u05d5\u05ea\u05dd \u05db\u05d3\u05d9 \u05e9\u05ea\u05e8\u05d2\u05d9\u05e9\u05d5 \u05de\u05e9\u05d4\u05d5, \u05d0\u05e4\u05d9\u05dc\u05d5 \u05d0\u05dd \u05d6\u05d4 \u05e7\u05e6\u05ea \u05db\u05d5\u05d0\u05d1. \u05d4\u05de\u05d5\u05d6\u05d9\u05e7\u05d4 \u05e9\u05dc\u05d9 \u05d4\u05d9\u05d0 \u05d4\u05de\u05e7\u05d5\u05dd \u05e9\u05d1\u05d5 \u05d4\u05d6\u05d4\u05d1 \u05e4\u05d5\u05d2\u05e9 \u05d0\u05ea \u05d4\u05dc\u05db\u05dc\u05d5\u05da.",
       albums: [
-        { title: "MY TIME", id: "1YlgXuafFIqVQetPn1OKTE" }
+        { title: "MY TIME", id: "1YlgXuafFIqVQetPn1OKTE", tracks: 10 }
       ]
     },
     {
