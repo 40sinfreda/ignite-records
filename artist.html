@@ -22,7 +22,7 @@
   <footer>
     <p><span data-i18n="footer">© 2026 Ignite Records. All rights reserved.</span> · <a href="index.html" data-i18n="home">Home</a></p>
   </footer>
-  <script src="js/catalog.js?v=20260918nw"></script>
+  <script src="js/catalog.js?v=20260919alb"></script>
   <script src="js/i18n.js?v=20260918hadar"></script>
   <script src="js/nav.js?v=20260918hadar"></script>
   <script>
@@ -38,7 +38,10 @@
       }
       var displayName = I.textOf(a, "name");
       document.title = displayName + " - Ignite Records";
-      var albumsHtml = (a.albums || []).map(function (alb) {
+      var albums = (a.albums || []).filter(function (alb) {
+        return (alb.tracks || 99) > 2;
+      });
+      var albumsHtml = albums.map(function (alb) {
         return (
           '<div class="album-block">' +
           '<h3>' + alb.title + '</h3>' +
@@ -75,6 +78,12 @@
         : "";
       var bio = I.lang() === "he" && a.bioHe ? a.bioHe : a.bio;
       var quote = I.lang() === "he" && a.quoteHe ? a.quoteHe : a.quote;
+      var discog =
+        albumsHtml
+          ? '<p class="section-label" style="margin-top:2rem">' + I.t("discography") + '</p>' +
+            '<h2 class="section-title">' + I.t("allAlbumsSpotify") + '</h2>' +
+            '<div class="album-list">' + albumsHtml + '</div>'
+          : "";
       root.innerHTML =
         '<section class="artist-hero">' +
         '<img src="' + a.photo + '" alt="' + displayName + '" />' +
@@ -87,9 +96,7 @@
         (a.ai ? '<span class="ai-badge">AI PRODUCT</span>' : '') +
         '</div>' +
         galleryHtml +
-        '<p class="section-label" style="margin-top:2rem">' + I.t("discography") + '</p>' +
-        '<h2 class="section-title">' + I.t("allAlbumsSpotify") + '</h2>' +
-        '<div class="album-list">' + albumsHtml + '</div>' +
+        discog +
         artistEmbed +
         (social.length
           ? '<div class="container-sm" style="text-align:center;padding-bottom:3rem">' +
